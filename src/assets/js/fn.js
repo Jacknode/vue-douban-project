@@ -16,14 +16,16 @@ export default function () {
 
     var navs = obj.querySelector('.pics');
     var lis = navs.children;
-    var liW = Obj.css(lis[0], 'width');
-    Obj.css(navs, 'width', lis.length * liW);
-    Obj.mScroll({
-      wrap: obj,
-      dir: 'x',
-      over: 'none',
-      showBar: false
-    });
+    if(lis.length){
+        var liW = Obj.css(lis[0], 'width');
+        Obj.css(navs, 'width', lis.length * liW);
+        Obj.mScroll({
+            wrap: obj,
+            dir: 'x',
+            over: 'none',
+            showBar: false
+        });
+    }
   }
 
   var wrap = document.querySelector('#wrap');

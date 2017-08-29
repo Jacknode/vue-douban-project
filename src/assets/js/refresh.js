@@ -48,11 +48,8 @@ export default function (itemThis,id) {
                 var min = wrap.clientHeight - scroll.offsetHeight;
                 var now = Obj.css(scroll,"translateY");
                 _this.$http.get('/list/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b').then(function (data) {
-                    console.log(data)
                     var data = data.data.reviews;
-
                     console.log(now,min - footer.offsetHeight)
-
                     if(now <= min - footer.offsetHeight ){
                         num+=2;
                         if(_this.reviews.length+num>=data.length){
@@ -63,8 +60,7 @@ export default function (itemThis,id) {
                             return;
                         }
                         console.log('上拉加载')
-                        console.log(data)
-                        console.log(_this)
+                        // console.log(data)
                         for(var i=0;i<data.length;i++){
                             var val = Math.round(data[i].rating.value);
                             if(val==0){
@@ -74,8 +70,9 @@ export default function (itemThis,id) {
                             }
                             data[i].index = val;
                         }
-                        var newArr = _this.reviews.concat(data.slice(_this.reviews.length+num,_this.reviews.length+num+2));
-                        _this.$store.dispatch('setReviews',newArr)
+                        // var newArr = _this.reviews.concat(data.slice(_this.reviews.length+num,_this.reviews.length+num+2));
+                        var newArr = data.slice(_this.reviews.length+num,_this.reviews.length+num+2);
+                        _this.$store.dispatch('pushReviews',newArr)
 
                         footer.style.display = "none";
                     }

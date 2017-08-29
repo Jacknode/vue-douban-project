@@ -7,12 +7,15 @@ import routerConfig from './router.config'
 import VueRouter from 'vue-router'
 import store from './store/'
 import axios from 'axios'
+import vueScroll from 'vue-scroller'
 
 import '@/assets/css/font-awesome.min.css'
 import '@/assets/css/index.css'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+import Obj from './assets/js/m.touch'
 Vue.use(MuseUI)
+Vue.use(vueScroll)
 
 Vue.use(VueRouter);
 Vue.use(loading);
@@ -54,3 +57,4 @@ new Vue({
 Vue.filter('format',function (val) {
     return val>0?'小':'大'
 })
+

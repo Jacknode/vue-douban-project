@@ -1,11 +1,15 @@
 <template>
     <div>
-        <!--中间部分-->
-        <section id="wrap">
-            <div class="scroll">
-                <div class="detailContent">
-                    <h2>{{details.title}}</h2>
-                    <div class="left">
+        <scroller
+            :on-refresh="refresh"
+            class="positions"
+            :on-infinite="infinite"
+            ref="uploading"
+            v-if="details"
+        >
+            <div class="detailContent">
+                <h2>{{details.title}}</h2>
+                <div class="left">
                         <span class="icons">
                             <i class="fa fa-star active"></i>
                             <i class="fa fa-star active"></i>
@@ -13,96 +17,99 @@
                             <i class="fa fa-star active"></i>
                             <i class="fa fa-star"></i>
                         </span>
-                        <span>{{details.ratings_count}}人评价</span>
-                        <p>{{details.durations[0]}} / {{details.genres[0]}} / {{details.casts[0].name}}(导演) / {{details.casts[0].name}} / {{details.casts[1].name}} / {{details.casts[2].name}} / {{details.casts[3].name}}  {{details.year}}({{details.countries[0]}}) 上映</p>
-                    </div>
-                    <div class="right">
-                        <img :src="details.images.small" alt="">
-                    </div>
-                    <div class="clear"></div>
-                    <p class="title">{{details.title}}的剧情简介</p>
-                    <p>{{details.summary}}</p>
-                    <p class="title">影人</p>
-                    <div class="picAll">
-                        <div class="pics">
-                            <a href="javascript:;" v-for="item in details.casts">
-                                <img :src="item.avatars.small" alt="">
-                                <p class="title">{{item.name}}</p>
-                            </a>
-                        </div>
-                    </div>
-                    <p class="title">{{details.title}}的短评</p>
-                    <div class="Essay" v-for="item in reviews">
-                        <div class="EssayLeft">
-                            <img :src="item.author.avatar" alt="">
-                        </div>
-                        <div class="EssayRight">
-                            <div class="EssayHeader">
-                                <span>{{item.author.name}}</span>
-                                <span>
-                                     <i class="fa fa-star active" v-for="a in item.index"></i>
-                                    <i class="fa fa-star" v-for="b in 5-item.index"></i>
-                                </span>
-                            </div>
-                            <p class="time">{{item.updated_at}}</p>
-                            <p class="content">
-                                {{item.summary}}
-                            </p>
-                            <p class="icon">
-                                <i class="fa fa-thumbs-o-up"></i><span>{{item.useful_count}}</span>
-                            </p>
-                        </div>
-                    </div>
-
+                    <span>{{details.ratings_count}}人评价</span>
+                    <p>{{details.durations[0]}} / {{details.genres[0]}} / {{details.casts[0].name}}(导演) / <span v-for="item in details.casts">{{item.name}}/</span> /   {{details.year}}({{details.countries[0]}}) 上映</p>
                 </div>
-                <div id="footer"><i class="fa fa-spinner fa-spin search"></i><span>加载更多</span></div>
+                <div class="right">
+                    <img :src="details.images.small" alt="">
+                </div>
+                <div class="clear"></div>
+                <p class="title">{{details.title}}的剧情简介</p>
+                <p>{{details.summary}}</p>
+                <p class="title">影人</p>
+                <div class="picAll">
+                    <div class="pics">
+                        <a href="javascript:;" v-for="item in details.casts">
+                            <img :src="item.avatars.small" alt="">
+                            <p class="title">{{item.name}}</p>
+                        </a>
+                    </div>
+                </div>
+                <p class="title">{{details.title}}的短评</p>
+                <Comments :reviews="reviews"></Comments>
+                <Comments :reviews="newDetails"></Comments>
             </div>
-        </section>
+        </scroller>
     </div>
 </template>
 <script>
-    import banner from '../assets/js/fn.js'
-    import Reflash from '../assets/js/refresh'
-    import {mapGetters,mapActions} from 'vuex'
+let page =0;//页数
+let count = 2;//每页加载多少条
+let firstLoaded = false;//判断第一次是否加载完成
+let moreLoaded = true;
+    import {mapGetters} from 'vuex'
+    import Comments from './Comments.vue'
     export default{
         name:'Detail',
         data(){
             return {
+                id:this.$route.params.id,
+                name:this.$route.params.name
             }
+        },
+        components:{
+            Comments
         },
         computed:mapGetters([
             'reviews',
-            'details'
+            'details',
+            'newDetails'
         ]),
         updated(){
-            banner();
-            Reflash(this,this.$route.params.id)
+        },
+        created(){
+
         },
         mounted(){
-            var name = this.$route.params.name;
-            var id =  this.$route.params.id;
-
-            //电影条目信息
-            this.$http.get('/list/subject/'+id+'?apikey=0b2bdeda43b5688921839c8ecb20399b').then((data)=>{
-                var result = data.data;
-//                console.log(result)
-                this.$store.dispatch('setDetails',result)
-            })
-            //短评条目列表
-            this.$http.get('/list/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=6').then((data)=>{
-                var reviews = data.data.reviews;
-                for(var i=0;i<reviews.length;i++){
-                    var start = Math.round(reviews[i].rating.value);
-                    if(start==0){
-                        reviews[i].isOff = false
-                    }else{
-                        reviews[i].isOff = true
-                    }
-                    reviews[i].index = start;
+            this.$store.dispatch('getTopList',this.id).then(() => {
+                setTimeout(() => {
+                    firstLoaded = true;
+                }, 300);
+            });
+        },
+        methods:{
+            refresh(){
+                console.log('refresh')
+            },
+            infinite(){
+//                if(!this.newDetails.length){
+//                    this.$refs.uploading.finishInfinite('没有数据了');
+//                    return;
+//                }
+                if(!firstLoaded){
+                    this.$refs.uploading.finishInfinite('没有数据了');
+                    return;
                 }
-                this.$store.dispatch('setReviews',reviews)
-            })
-
+                if(!moreLoaded){
+                    return;
+                }
+                moreLoaded = false;
+                if(count==20){
+                    page++;
+                    count = 0;
+                }
+                count+=2;
+                this.$store.dispatch('loadMoreList', {
+                    page,
+                    count,
+                    id:this.id
+                }).then(() => {
+                    this.$nextTick(()=>{
+                        this.$refs.uploading.finishInfinite();
+                    });
+                    moreLoaded = true;
+                })
+            }
         }
     }
 </script>
@@ -110,13 +117,8 @@
     .picAll .pics a{
         color: #aaa;
     }
-    #footer{
-        position: absolute;
-        left: 0;
-        bottom: -2rem;
-        width: 100%;
-        font: .8rem/1.6rem "宋体";
-        text-align: center;
-        /*display: none;*/
+    .positions{
+        top:3rem;
     }
+
 </style>

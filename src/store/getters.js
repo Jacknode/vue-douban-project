@@ -28,5 +28,33 @@ export default {
     },
     showBookLoadAll(state){
         return state.showBookLoadAll;
+    },
+    newDetails(state){
+        return state.newDetails;
+    },
+    BookDetails(state){
+        return state.BookDetails
+    },
+    BookReviews(state){
+        return state.BookReviews;
+    },
+    newLists(state){
+        return state.newLists;
+    },
+    newBookReviews(state){
+        return state.newBookReviews;
+    },
+    //音乐
+    MusicDetails(state){
+        return state.MusicDetails;
+    },
+    musicComments(state){
+        return state.musicComments
+    },
+    newMusicReviews(state){
+        return state.newMusicReviews;
+    },
+    movieCards(state){
+        return state.movieCards;
     }
 }

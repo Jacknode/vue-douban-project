@@ -3,14 +3,15 @@
         <div class="wrapNav">
             <nav class="nav">
                 <div class="card" v-for="item in footerList">
-                    <a href="javascript:;">
+                    <router-link :to="{ name: 'newList', params: { name: item.name[0]?item.name[0].link:'' }}">
                         <span>{{item.name[0].val}}</span>
                         <span><i class="fa fa-angle-right"></i></span>
-                    </a>
-                    <a href="javascript:;" v-show="item.name[1]">
+                    </router-link>
+
+                    <router-link :to="{ name: 'newList', params: { name: item.name[1]?item.name[1].link:'' }}"  v-show="item.name[1]">
                         <span>{{item.name[1]?item.name[1].val:''}}</span>
                         <span><i class="fa fa-angle-right"></i></span>
-                    </a>
+                    </router-link>
                 </div>
             </nav>
         </div>
@@ -22,6 +23,11 @@
         name: '',
         mounted(){
 //            console.log(this.footerList)
+        },
+        computed:{
+            nextList(item){
+                console.log(item)
+            }
         }
     }
 </script>

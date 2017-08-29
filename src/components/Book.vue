@@ -3,8 +3,9 @@
         <!--中间部分-->
         <section id="wrap">
             <div class="scroll">
-                <ContentView :banner="newArrList" title="最受关注图书｜虚构类" itemStr="in_theaters"></ContentView>
-                <ContentView :banner="newArrList2" title="最受关注图书｜非虚构类" itemStr="coming_soon"></ContentView>
+                <BookContentView :banner="newArrList" title="最受关注图书｜虚构类" itemStr="fiction">
+                </BookContentView>
+                <BookContentView :banner="newArrList2" title="最受关注图书｜非虚构类" itemStr="nonfiction"></BookContentView>
                 <FooterList :footerList="footerList" itemStr="book"></FooterList>
             </div>
         </section>
@@ -13,8 +14,9 @@
 <script>
     //  console.log(css)
     import banner from '../assets/js/fn.js'
-    import ContentView from './wrapContent.vue'
+    import BookContentView from './BookContent.vue'
     import FooterList from './footerList.vue'
+    import JSONP from '../assets/js/JSONP'
     export default{
         name:'Home',
         data(){
@@ -29,22 +31,22 @@
                 newArrList2:[],
                 footerList:[
                         {
-                            name:[{val:'小说',link:'novel'},{val:'爱情',link:'love'}]
+                            name:[{val:'小说',link:'bookBnovel'},{val:'爱情',link:'bookBlove'}]
                         },
                         {
-                            name:[{val:'历史',link:'history'},{val:'外国文学',link:'foreign'}]
+                            name:[{val:'历史',link:'bookBhistory'},{val:'外国文学',link:'bookBforeign'}]
                         },
                         {
-                            name:[{val:'青春',link:'youth'},{val:'励志',link:'motivation'}]
+                            name:[{val:'青春',link:'bookByouth'},{val:'励志',link:'bookBmotivation'}]
                         },
                         {
-                            name:[{val:'随笔',link:'essay'},{val:'传记',link:'bio'}]
+                            name:[{val:'随笔',link:'bookBessay'},{val:'传记',link:'bookBbio'}]
                         },
                         {
-                            name:[{val:'推理',link:'detective'},{val:'旅行',link:'travel'}]
+                            name:[{val:'推理',link:'bookBdetective'},{val:'旅行',link:'bookBtravel'}]
                         },
                         {
-                            name:[{val:'奇幻',link:'fantasy'},{val:'经营',link:'business'}]
+                            name:[{val:'奇幻',link:'bookBfantasy'},{val:'经营',link:'bookBbusiness'}]
                         }
                      ]
             }
@@ -74,7 +76,7 @@
             }
         },
         components:{
-            ContentView,
+            BookContentView,
             FooterList
         }
     }

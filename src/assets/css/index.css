@@ -50,6 +50,7 @@ a {
 }
 header {
   height: 3rem;
+  background: #fff;
   line-height: 3rem;
   border-bottom: 1px solid #f3f3f3;
 }
@@ -229,7 +230,6 @@ header .header a i {
 #wrap .MorePics a {
   float: left;
   display: inline-block;
-  margin-bottom: 1rem;
   width: 5.5rem;
   padding: 0.5rem 0;
   margin-right: 0.5rem;
@@ -266,61 +266,53 @@ header .header a i {
 #wrap .MorePics a i.active {
   color: #f6b633;
 }
-#wrap {
-  position: absolute;
-  top: 3rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
+.detailContent {
+  padding: 1rem;
   overflow: hidden;
 }
-#wrap .detailContent {
-  padding: 1rem;
-}
-#wrap .detailContent h2 {
+.detailContent h2 {
   padding-bottom: 0.5rem;
 }
-#wrap .detailContent .left {
+.detailContent .left {
   float: left;
   width: 10rem;
 }
-#wrap .detailContent .left .icons {
+.detailContent .left .icons {
   padding-right: 0.5rem;
 }
-#wrap .detailContent .left .icons i {
+.detailContent .left .icons i {
   float: left;
 }
-#wrap .detailContent .left .icons i.active {
+.detailContent .left .icons i.active {
   color: #f6b633;
 }
-#wrap .detailContent .left p:nth-of-type(1) {
+.detailContent .left p:nth-of-type(1) {
   padding-top: 0.5rem;
 }
-#wrap .detailContent .right {
+.detailContent .right {
   float: right;
   width: 6.5rem;
 }
-#wrap .detailContent .right img {
+.detailContent .right img {
   width: 100%;
   height: 10rem;
 }
-#wrap .detailContent .title {
+.detailContent .title {
   color: #aaa;
   padding: 2rem 0;
 }
-#wrap .detailContent .picAll {
+.detailContent .picAll {
   width: 100%;
   height: 12.2rem;
   position: relative;
   overflow: hidden;
 }
-#wrap .detailContent .picAll .pics {
+.detailContent .picAll .pics {
   position: absolute;
   height: 100%;
   z-index: 2;
 }
-#wrap .detailContent .picAll .pics a {
+.detailContent .picAll .pics a {
   float: left;
   display: inline-block;
   width: 6rem;
@@ -328,83 +320,83 @@ header .header a i {
   position: relative;
   height: 100%;
 }
-#wrap .detailContent .picAll .pics a img {
+.detailContent .picAll .pics a img {
   width: 6rem;
   height: 9.1rem;
 }
-#wrap .detailContent .picAll .pics a p:nth-of-type(1) {
+.detailContent .picAll .pics a p:nth-of-type(1) {
   text-align: center;
   padding-top: 0.5rem;
   margin-bottom: 0.25rem;
 }
-#wrap .detailContent .picAll .pics a p:nth-of-type(2) {
+.detailContent .picAll .pics a p:nth-of-type(2) {
   vertical-align: top;
   padding-left: 0.7rem;
 }
-#wrap .detailContent .picAll .pics a p:nth-of-type(2) i {
+.detailContent .picAll .pics a p:nth-of-type(2) i {
   float: left;
   font-size: 0.6rem;
   margin-right: 0.05rem;
 }
-#wrap .detailContent .picAll .pics a span {
+.detailContent .picAll .pics a span {
   position: absolute;
   right: 0.25rem;
   bottom: 0;
   font-size: 0.6rem;
   vertical-align: top;
 }
-#wrap .detailContent .picAll .pics a i.active {
+.detailContent .picAll .pics a i.active {
   color: #f6b633;
 }
-#wrap .detailContent .Essay {
+.detailContent .Essay {
   margin-bottom: 1rem;
   overflow: hidden;
   padding: 1rem;
 }
-#wrap .detailContent .Essay .EssayLeft {
+.detailContent .Essay .EssayLeft {
   float: left;
   width: 2.5rem;
   height: 2.5rem;
 }
-#wrap .detailContent .Essay .EssayLeft img {
+.detailContent .Essay .EssayLeft img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
-#wrap .detailContent .Essay .EssayRight {
+.detailContent .Essay .EssayRight {
   float: left;
   width: 13rem;
 }
-#wrap .detailContent .Essay .EssayRight .EssayHeader {
+.detailContent .Essay .EssayRight .EssayHeader {
   line-height: 2rem;
   padding-left: 0.5rem;
 }
-#wrap .detailContent .Essay .EssayRight .EssayHeader span:nth-of-type(1) {
+.detailContent .Essay .EssayRight .EssayHeader span:nth-of-type(1) {
   float: left;
 }
-#wrap .detailContent .Essay .EssayRight .EssayHeader span:nth-of-type(2) {
+.detailContent .Essay .EssayRight .EssayHeader span:nth-of-type(2) {
   padding-left: 0.5rem;
   display: inline-block;
   line-height: 1.6rem;
   height: 1.6rem;
 }
-#wrap .detailContent .Essay .EssayRight .EssayHeader span:nth-of-type(2) i.active {
+.detailContent .Essay .EssayRight .EssayHeader span:nth-of-type(2) i.active {
   padding-top: 0.5rem;
   color: #f6b633;
   float: left;
 }
-#wrap .detailContent .Essay .EssayRight .time {
+.detailContent .Essay .EssayRight .time {
   font-size: 0.7rem;
   color: #aaa;
   padding-left: 0.7rem;
 }
-#wrap .detailContent .Essay .EssayRight .content {
+.detailContent .Essay .EssayRight .content {
   padding-top: 0.5rem;
 }
-#wrap .detailContent .Essay .EssayRight .icon {
+.detailContent .Essay .EssayRight .icon {
   color: #aaa;
 }
-#wrap .detailContent .Essay .EssayRight .icon span {
+.detailContent .Essay .EssayRight .icon span {
   padding-left: 0.5rem;
   font-size: 0.7rem;
 }

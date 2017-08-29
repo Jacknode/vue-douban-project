@@ -28,13 +28,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/list': {
-        target: 'https://api.douban.com',
-        pathRewrite: {
-          '^/list': '/v2/movie'
-        },
-        changeOrigin: true
-      },
+          '/list': {
+            target: 'https://api.douban.com',
+            pathRewrite: {
+              '^/list': '/v2/movie'
+            },
+            changeOrigin: true
+          },
         '/book':{
             target: 'https://api.douban.com',
             pathRewrite: {
@@ -42,8 +42,8 @@ module.exports = {
             },
             changeOrigin: true
         },
-        'bookProject':{
-          target:'https://m.douban.com',
+        '/bookProject':{
+            target:'https://m.douban.com',
             pathRewrite: {
                 '^/bookProject': '/rexxar/api/v2'
             },

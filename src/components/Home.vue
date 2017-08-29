@@ -3,7 +3,8 @@
     <!--中间部分-->
     <section id="wrap">
       <div class="scroll">
-          <ContentView :banner="bannerList" title="影院热映" itemStr="in_theaters"></ContentView>
+          <ContentView :banner="bannerList" title="影院热映" itemStr="in_theaters">
+          </ContentView>
           <ContentView :banner="UpcomingList" title="即将上映" itemStr="coming_soon"></ContentView>
           <ContentView :banner="UpcomingList" title="新片榜" itemStr="new_movies"></ContentView>
           <ContentView :banner="TopList" title="Top250" itemStr="top250"></ContentView>
@@ -27,31 +28,31 @@ export default{
             TopList:[],
             footerList:[
                 {
-                    name:[{val:'经典',link:'classic'},{val:'冷门佳片',link:'underrated'}]
+                    name:[{val:'经典',link:'movieVclassic'},{val:'冷门佳片',link:'movieVunderrated'}]
                 },
                 {
-                    name:[{val:'豆瓣高分',link:'doubantop'},{val:'动作',link:'action'}]
+                    name:[{val:'豆瓣高分',link:'movieVdoubantop'},{val:'动作',link:'movieVaction'}]
                 },
                 {
-                    name:[{val:'喜剧',link:'comedy'},{val:'爱情',link:'love'}]
+                    name:[{val:'喜剧',link:'movieVcomedy'},{val:'爱情',link:'movieVlove'}]
                 },
                 {
-                    name:[{val:'悬疑',link:'mystery'},{val:'恐怖',link:'horror'}]
+                    name:[{val:'悬疑',link:'movieVmystery'},{val:'恐怖',link:'movieVhorror'}]
                 },
                 {
-                    name:[{val:'科幻',link:'scifi'},{val:'治愈',link:'sweet'}]
+                    name:[{val:'科幻',link:'movieVscifi'},{val:'治愈',link:'movieVsweet'}]
                 },
                 {
-                    name:[{val:'文艺',link:'artfilm'},{val:'成长',link:'youth'}]
+                    name:[{val:'文艺',link:'movieVartfilm'},{val:'成长',link:'movieVyouth'}]
                 },
                 {
-                    name:[{val:'动画',link:'animation'},{val:'华语',link:'chinese'}]
+                    name:[{val:'动画',link:'movieVanimation'},{val:'华语',link:'movieVchinese'}]
                 },
                 {
-                    name:[{val:'欧美',link:'western'},{val:'韩国',link:'korean'}]
+                    name:[{val:'欧美',link:'movieVwestern'},{val:'韩国',link:'movieVkorean'}]
                 },
                 {
-                    name:[{val:'日本',link:'japanese'}]
+                    name:[{val:'日本',link:'movieVjapanese'}]
                 }]
         }
     },

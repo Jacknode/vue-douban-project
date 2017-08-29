@@ -26,6 +26,7 @@ a{
 //首页
 header{
   height:60/@r;
+    background: #fff;
   line-height:60/@r;
   border-bottom: 1px solid #f3f3f3;
   .header{
@@ -209,7 +210,7 @@ header{
     a{
       float: left;
       display: inline-block;
-        margin-bottom: 20/@r;
+        //margin-bottom: 20/@r;
       width: 110/@r;
         padding: 10/@r 0;
       margin-right: 10/@r;
@@ -249,148 +250,286 @@ header{
   }
 }
 //详情
-#wrap{
-  position: absolute;
-  top:60/@r;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  overflow: hidden;
-  .detailContent{
-    padding:20/@r;
-    h2{
-      padding-bottom: 10/@r;
-    }
-    .left{
-      float: left;
-      width: 200/@r;
-      .icons{
-        padding-right: 10/@r;
-        i{
-          float: left;
+//#wrap{
+//  position: absolute;
+//  top:60/@r;
+//  left: 0;
+//  right: 0;
+//  bottom: 0;
+//  width: 100%;
+//  overflow: hidden;
+//  .detailContent{
+//    padding:20/@r;
+//    h2{
+//      padding-bottom: 10/@r;
+//    }
+//    .left{
+//      float: left;
+//      width: 200/@r;
+//      .icons{
+//        padding-right: 10/@r;
+//        i{
+//          float: left;
+//        }
+//        i.active{
+//          color: #f6b633;
+//        }
+//      }
+//      p:nth-of-type(1){
+//        padding-top: 10/@r;
+//
+//      }
+//
+//    }
+//    .right{
+//      float: right;
+//      width: 130/@r;
+//      img{
+//        width: 100%;
+//        height: 200/@r;
+//      }
+//    }
+//    .title{
+//      color: #aaa;
+//      padding: 40/@r 0;
+//    }
+//    .picAll{
+//      width: 100%;
+//      height: 244/@r;
+//      position: relative;
+//      overflow: hidden;
+//      .pics{
+//        position: absolute;
+//        height: 100%;
+//        z-index: 2;
+//        a{
+//          float: left;
+//          display: inline-block;
+//          width: 120/@r;
+//          margin-right: 10/@r;
+//          position: relative;
+//          height: 100%;
+//          img{
+//            width: 120/@r;
+//            height: 182/@r;
+//          }
+//          p:nth-of-type(1){
+//            text-align: center;
+//            padding-top: 10/@r;
+//            margin-bottom: 5/@r;
+//          }
+//          p:nth-of-type(2){
+//            vertical-align: top;
+//            padding-left: 14/@r;
+//            i{
+//              float: left;
+//              font-size:12/@r;
+//              margin-right: 1/@r;
+//            }
+//          }
+//          span{
+//            position: absolute;
+//            right: 5/@r;
+//            bottom:0;
+//            font-size:12/@r;
+//            vertical-align: top;
+//          }
+//          i.active{
+//            color: #f6b633;
+//          }
+//        }
+//      }
+//    }
+//    .Essay{
+//      //height: 280/@r;
+//      margin-bottom: 20/@r;
+//      overflow: hidden;
+//      padding: 20/@r;
+//        .EssayLeft{
+//          float: left;
+//          width: 50/@r;
+//          height: 50/@r;
+//          img{
+//            width: 100%;
+//            height: 100%;
+//            border-radius: 50%;
+//          }
+//        }
+//      .EssayRight{
+//        float: left;
+//        width: 13rem;
+//        .EssayHeader{
+//          line-height:40/@r;
+//          padding-left: 10/@r;
+//          span:nth-of-type(1){
+//            float: left;
+//          }
+//          span:nth-of-type(2){
+//            padding-left: 10/@r;
+//            display: inline-block;
+//            line-height:32/@r;
+//            height: 32/@r;
+//            i.active{
+//              padding-top: 10/@r;
+//              color: #f6b633;
+//              float: left;
+//            }
+//          }
+//        }
+//        .time{
+//          font-size:14/@r;
+//          color: #aaa;
+//          padding-left: 14/@r;
+//        }
+//        .content{
+//          padding-top: 10/@r;
+//        }
+//        .icon{
+//          color: #aaa;
+//          span{
+//            padding-left: 10/@r;
+//            font-size:14/@r;
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
+    .detailContent{
+        padding:20/@r;
+        overflow: hidden;
+        h2{
+            padding-bottom: 10/@r;
         }
-        i.active{
-          color: #f6b633;
-        }
-      }
-      p:nth-of-type(1){
-        padding-top: 10/@r;
-
-      }
-
-    }
-    .right{
-      float: right;
-      width: 130/@r;
-      img{
-        width: 100%;
-        height: 200/@r;
-      }
-    }
-    .title{
-      color: #aaa;
-      padding: 40/@r 0;
-    }
-    .picAll{
-      width: 100%;
-      height: 244/@r;
-      position: relative;
-      overflow: hidden;
-      .pics{
-        position: absolute;
-        height: 100%;
-        z-index: 2;
-        a{
-          float: left;
-          display: inline-block;
-          width: 120/@r;
-          margin-right: 10/@r;
-          position: relative;
-          height: 100%;
-          img{
-            width: 120/@r;
-            height: 182/@r;
-          }
-          p:nth-of-type(1){
-            text-align: center;
-            padding-top: 10/@r;
-            margin-bottom: 5/@r;
-          }
-          p:nth-of-type(2){
-            vertical-align: top;
-            padding-left: 14/@r;
-            i{
-              float: left;
-              font-size:12/@r;
-              margin-right: 1/@r;
-            }
-          }
-          span{
-            position: absolute;
-            right: 5/@r;
-            bottom:0;
-            font-size:12/@r;
-            vertical-align: top;
-          }
-          i.active{
-            color: #f6b633;
-          }
-        }
-      }
-    }
-    .Essay{
-      //height: 280/@r;
-      margin-bottom: 20/@r;
-      overflow: hidden;
-      padding: 20/@r;
-        .EssayLeft{
-          float: left;
-          width: 50/@r;
-          height: 50/@r;
-          img{
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-          }
-        }
-      .EssayRight{
-        float: left;
-        width: 13rem;
-        .EssayHeader{
-          line-height:40/@r;
-          padding-left: 10/@r;
-          span:nth-of-type(1){
+        .left{
             float: left;
-          }
-          span:nth-of-type(2){
-            padding-left: 10/@r;
-            display: inline-block;
-            line-height:32/@r;
-            height: 32/@r;
-            i.active{
-              padding-top: 10/@r;
-              color: #f6b633;
-              float: left;
+            width: 200/@r;
+            .icons{
+                padding-right: 10/@r;
+                i{
+                    float: left;
+                }
+                i.active{
+                    color: #f6b633;
+                }
             }
-          }
+            p:nth-of-type(1){
+                padding-top: 10/@r;
+
+            }
+
         }
-        .time{
-          font-size:14/@r;
-          color: #aaa;
-          padding-left: 14/@r;
+        .right{
+            float: right;
+            width: 130/@r;
+            img{
+                width: 100%;
+                height: 200/@r;
+            }
         }
-        .content{
-          padding-top: 10/@r;
+        .title{
+            color: #aaa;
+            padding: 40/@r 0;
         }
-        .icon{
-          color: #aaa;
-          span{
-            padding-left: 10/@r;
-            font-size:14/@r;
-          }
+        .picAll{
+            width: 100%;
+            height: 244/@r;
+            position: relative;
+            overflow: hidden;
+            .pics{
+                position: absolute;
+                height: 100%;
+                z-index: 2;
+                a{
+                    float: left;
+                    display: inline-block;
+                    width: 120/@r;
+                    margin-right: 10/@r;
+                    position: relative;
+                    height: 100%;
+                    img{
+                        width: 120/@r;
+                        height: 182/@r;
+                    }
+                    p:nth-of-type(1){
+                        text-align: center;
+                        padding-top: 10/@r;
+                        margin-bottom: 5/@r;
+                    }
+                    p:nth-of-type(2){
+                        vertical-align: top;
+                        padding-left: 14/@r;
+                        i{
+                            float: left;
+                            font-size:12/@r;
+                            margin-right: 1/@r;
+                        }
+                    }
+                    span{
+                        position: absolute;
+                        right: 5/@r;
+                        bottom:0;
+                        font-size:12/@r;
+                        vertical-align: top;
+                    }
+                    i.active{
+                        color: #f6b633;
+                    }
+                }
+            }
         }
-      }
+        .Essay{
+            //height: 280/@r;
+            margin-bottom: 20/@r;
+            overflow: hidden;
+            padding: 20/@r;
+            .EssayLeft{
+                float: left;
+                width: 50/@r;
+                height: 50/@r;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+            }
+            .EssayRight{
+                float: left;
+                width: 13rem;
+                .EssayHeader{
+                    line-height:40/@r;
+                    padding-left: 10/@r;
+                    span:nth-of-type(1){
+                        float: left;
+                    }
+                    span:nth-of-type(2){
+                        padding-left: 10/@r;
+                        display: inline-block;
+                        line-height:32/@r;
+                        height: 32/@r;
+                        i.active{
+                            padding-top: 10/@r;
+                            color: #f6b633;
+                            float: left;
+                        }
+                    }
+                }
+                .time{
+                    font-size:14/@r;
+                    color: #aaa;
+                    padding-left: 14/@r;
+                }
+                .content{
+                    padding-top: 10/@r;
+                }
+                .icon{
+                    color: #aaa;
+                    span{
+                        padding-left: 10/@r;
+                        font-size:14/@r;
+                    }
+                }
+            }
+        }
     }
-  }
-}
+
