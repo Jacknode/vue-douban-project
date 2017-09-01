@@ -49,6 +49,7 @@ a {
   clear: both;
 }
 header {
+  position: relative;
   height: 3rem;
   background: #fff;
   line-height: 3rem;

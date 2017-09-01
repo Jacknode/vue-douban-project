@@ -24,41 +24,17 @@
                     <img :src="BookDetails.images.small" alt="">
                 </div>
                 <div class="clear"></div>
+                <div class="top" :class="{show:isShow}">收藏成功</div>
+                <div class="buy" :class="{addBuy:isBuy}">添加到购物车成功</div>
+                <div class="login" :class="{addLogin:isLog}">请先登录！</div>
+                <div class="add">
+                    <div class="Collection" @touchstart="Collection">收藏</div>
+                    <div class="red" @touchstart="Buy">购买</div>
+                </div>
                 <p class="title">{{BookDetails.title}}的内容简介</p>
                 <p>{{BookDetails.summary}}</p>
                 <BookComments :reviews="BookReviews"></BookComments>
                 <BookComments :reviews="newBookReviews"></BookComments>
-                <!--<p class="title">影人</p>-->
-                <!--<div class="picAll">-->
-                    <!--<div class="pics">-->
-                        <!--<a href="javascript:;" v-for="item in BookDetails.casts">-->
-                            <!--<img :src="item.avatars.small" alt="">-->
-                            <!--<p class="title">{{item.name}}</p>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<p class="title">{{BookDetails.title}}的短评</p>-->
-                <!--<div class="Essay" v-for="item in reviews">-->
-                    <!--<div class="EssayLeft">-->
-                        <!--<img :src="item.author.avatar" alt="">-->
-                    <!--</div>-->
-                    <!--<div class="EssayRight">-->
-                        <!--<div class="EssayHeader">-->
-                            <!--<span>{{item.author.name}}</span>-->
-                            <!--<span>-->
-                                     <!--<i class="fa fa-star active" v-for="a in item.index"></i>-->
-                                    <!--<i class="fa fa-star" v-for="b in 5-item.index"></i>-->
-                                <!--</span>-->
-                        <!--</div>-->
-                        <!--<p class="time">{{item.updated_at}}</p>-->
-                        <!--<p class="content">-->
-                            <!--{{item.summary}}-->
-                        <!--</p>-->
-                        <!--<p class="icon">-->
-                            <!--<i class="fa fa-thumbs-o-up"></i><span>{{item.useful_count}}</span>-->
-                        <!--</p>-->
-                    <!--</div>-->
-                <!--</div>-->
             </div>
         </scroller>
     </div>
@@ -77,13 +53,19 @@
         data(){
             return {
                 id:this.$route.params.id,
-                name:this.$route.params.name
+                name:this.$route.params.name,
+                addCollection:true,
+                isShow:false,
+                isBuy:false,
+                addBuyCollection:true,
+                isLog:false
             }
         },
         computed:mapGetters([
             'BookReviews',
             'BookDetails',
-            'newBookReviews'
+            'newBookReviews',
+            'isLogin'
         ]),
         mounted(){
             this.$store.dispatch('getInfoList',this.id).then(()=>{
@@ -95,10 +77,6 @@
                 console.log('refresh')
             },
             infinite(){
-//                if(!this.newBookReviews.length){
-//                    this.$refs.bookDetail.finishInfinite('没有数据了');
-//                    return
-//                }
                 if(!firstLoaded){
                     this.$refs.bookDetail.finishInfinite('没有数据了');
                     return;
@@ -123,6 +101,40 @@
                     });
                     moreLoaded = true;
                 })
+            },
+            Collection(){
+                if(this.addCollection){
+                    if(this.isLogin){
+                        this.$store.dispatch('setBookCollection',this.$store.getters.BookDetails);
+                        this.addCollection = false;
+                        this.isShow = true;
+                        setTimeout(()=>{
+                            this.isShow = false;
+                        },2000)
+                    }else{
+                        this.isLog = true;
+                        setTimeout(()=>{
+                            this.isLog = false;
+                        },2000)
+                    }
+                }
+            },
+            Buy(){
+                if(this.addBuyCollection){
+                    if(this.isLogin){
+                        this.$store.dispatch('setBuyBook',this.$store.getters.BookDetails)
+                        this.isBuy = true;
+                        this.addBuyCollection = false;
+                        setTimeout(()=>{
+                            this.isBuy = false;
+                        },2000)
+                    }else{
+                        this.isLog = true;
+                        setTimeout(()=>{
+                            this.isLog = false;
+                        },2000)
+                    }
+                }
             }
         },
         components:{
@@ -130,14 +142,85 @@
         }
     }
 </script>
-<style scoped>
+<style scoped lang="less">
+    @r:20rem;
     .picAll .pics a{
         color: #aaa;
     }
     .positions{
         top:3rem;
+        margin-bottom: -3rem;
     }
     .EssayHeader i{
         color: #aaa;
+    }
+    .Collection {
+        width: 100/@r;
+        height: 30px;
+        border: 1px solid green;
+        text-align: center;
+        line-height: 30px;
+        background: green;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .red {
+        width: 100/@r;
+        height: 30px;
+        border: 1px solid #f60;
+        text-align: center;
+        line-height: 30px;
+        background: #f60;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .top{
+        position: absolute;
+        left: 160/@r;
+        top:1rem;
+        transition: .5s;
+        background: green;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size:12px;
+    }
+    .show{
+        top:4rem;
+    }
+    .buy{
+        position: absolute;
+        left: 130/@r;
+        top:1rem;
+        transition: .5s;
+        background: #f60;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size:12px;
+    }
+    .login{
+        position: absolute;
+        left: 130/@r;
+        top:1rem;
+        transition: .5s;
+        background: #f60;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size:12px;
+    }
+    .addBuy{
+        top:4rem;
+    }
+    .addLogin{
+        top:4rem;
+    }
+    .add{
+        margin-bottom:20/@r;
+    div{
+        float: left;
+        margin-right: 4px;
+    }
     }
 </style>

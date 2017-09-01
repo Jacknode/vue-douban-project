@@ -14,6 +14,8 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+
     export default {
         data () {
             return {
@@ -25,6 +27,9 @@
                 isRed:false
             }
         },
+        computed:mapGetters([
+            'isLogin'
+        ]),
         methods: {
             username (val) {
                 this.usernameVal = val;
@@ -45,12 +50,16 @@
                 if(this.loginCeItem()){
                     this.isShow = true;
                         this.text = '登录成功';
+                        this.$store.dispatch('setIsLogin',{
+                            username:this.usernameVal
+                        })
                         setTimeout(()=>{
                             this.isShow = false
                         },1000);
-                    setTimeout(()=>{
-                        window.location.href = 'http://localhost:8080/'
-                    },2000)
+//                    setTimeout(()=>{
+//                        window.location.href = 'http://localhost:8080/'
+//                    },2000)
+                    this.$router.push({path:'/'})
                 }else{
                     this.text = '登录失败';
                     this.isRed = true;

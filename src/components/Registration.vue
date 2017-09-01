@@ -37,7 +37,8 @@
                 this.isShow = true;
                 this.text = '注册成功'
                 setTimeout(()=>{
-                    this.isShow = false
+                    this.isShow = false;
+                    window.location.href = 'http://localhost:8080/login'
                 },2000)
 //                if(this.loginCeItem()){
 //                    this.isShow = true;

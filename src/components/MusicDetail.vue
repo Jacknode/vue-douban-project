@@ -21,6 +21,8 @@
                     <img :src="MusicDetails.image" alt="">
                 </div>
                 <div class="clear"></div>
+                <div class="top" :class="{show:isShow}">添加成功</div>
+                <div class="Collection" @touchstart="Collection">喜欢</div>
                 <p class="title">{{MusicDetails.title}}的唱片简介</p>
                 <p>{{MusicDetails.summary}}</p>
                 <BookComments :reviews="musicComments"></BookComments>
@@ -43,6 +45,8 @@
         data(){
             return {
                 id:this.$route.params.id,
+                addCollection:true,
+                isShow:false
             }
         },
         computed:mapGetters([
@@ -84,6 +88,16 @@
                     });
                     moreLoaded = true;
                 })
+            },
+            Collection(){
+                if(this.addCollection){
+                    this.$store.dispatch('setMusicCollection',this.$store.getters.MusicDetails);
+                    this.addCollection = false;
+                    this.isShow = true;
+                    setTimeout(()=>{
+                        this.isShow = false;
+                    },2000)
+                }
             }
         },
         components:{
@@ -91,17 +105,43 @@
         }
     }
 </script>
-<style scoped>
+<style scoped lang="less">
+    @r:20rem;
     .picAll .pics a{
         color: #aaa;
     }
     .positions{
         top:3rem;
+        margin-bottom: -3rem;
     }
     .EssayHeader i{
         color: #aaa;
     }
     .mar{
         margin-right: 5px;
+    }
+    .Collection {
+        width: 100px;
+        height: 30px;
+        border: 1px solid green;
+        text-align: center;
+        line-height: 30px;
+        background: green;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .top{
+        position: absolute;
+        left: 160/@r;
+        top:1rem;
+        transition: .5s;
+        background: green;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size:12px;
+    }
+    .show{
+        top:4rem;
     }
 </style>

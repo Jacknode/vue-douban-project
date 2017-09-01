@@ -13,7 +13,6 @@ import '@/assets/css/font-awesome.min.css'
 import '@/assets/css/index.css'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
-import Obj from './assets/js/m.touch'
 Vue.use(MuseUI)
 Vue.use(vueScroll)
 

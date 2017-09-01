@@ -24,6 +24,10 @@
                     <img :src="details.images.small" alt="">
                 </div>
                 <div class="clear"></div>
+                <div class="top" :class="{show:isShow}">添加成功</div>
+                <div class="add">
+                    <div class="Collection" @touchstart="Collection">收藏</div>
+                </div>
                 <p class="title">{{details.title}}的剧情简介</p>
                 <p>{{details.summary}}</p>
                 <p class="title">影人</p>
@@ -54,7 +58,9 @@ let moreLoaded = true;
         data(){
             return {
                 id:this.$route.params.id,
-                name:this.$route.params.name
+                name:this.$route.params.name,
+                addCollection:true,
+                isShow:false
             }
         },
         components:{
@@ -65,11 +71,6 @@ let moreLoaded = true;
             'details',
             'newDetails'
         ]),
-        updated(){
-        },
-        created(){
-
-        },
         mounted(){
             this.$store.dispatch('getTopList',this.id).then(() => {
                 setTimeout(() => {
@@ -82,10 +83,6 @@ let moreLoaded = true;
                 console.log('refresh')
             },
             infinite(){
-//                if(!this.newDetails.length){
-//                    this.$refs.uploading.finishInfinite('没有数据了');
-//                    return;
-//                }
                 if(!firstLoaded){
                     this.$refs.uploading.finishInfinite('没有数据了');
                     return;
@@ -109,16 +106,59 @@ let moreLoaded = true;
                     });
                     moreLoaded = true;
                 })
+            },
+            Collection(){
+                if(this.addCollection){
+                    this.$store.dispatch('setMovieCollection',this.$store.getters.details)
+                    this.addCollection = false;
+                    this.isShow = true;
+                    setTimeout(()=>{
+                        this.isShow = false;
+                    },2000)
+                }
+
             }
         }
     }
 </script>
-<style scoped>
+<style scoped lang="less">
+    @r:20rem;
     .picAll .pics a{
         color: #aaa;
     }
     .positions{
         top:3rem;
+        margin-bottom: -3rem;
     }
-
+    .Collection {
+        width: 100/@r;
+        height: 30px;
+        border: 1px solid green;
+        text-align: center;
+        line-height: 30px;
+        background: green;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .top{
+        position: absolute;
+        left: 160/@r;
+        top:1rem;
+        transition: .5s;
+        background: green;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size:12px;
+    }
+    .show{
+        top:4rem;
+    }
+    .add{
+        margin-bottom:20/@r;
+        div{
+            float: left;
+            margin-right: 4px;
+        }
+    }
 </style>

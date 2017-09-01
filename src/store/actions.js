@@ -221,17 +221,57 @@ export default {
                     }
                 }
                 result = result.slice(count-2);
-                commit('setMusicCommentsList',result)
+                commit('setMusicCommentsList',result);
                 resolve();
             })
         })
     },
     //首页
-    getCards({commit}){
+    getCards(store){
+        store.dispatch('showLoading');
         JSONP.getJSON('https://m.douban.com/rexxar/api/v2/recommend_feed?callback=json1',null,function (data) {
+            store.dispatch('hideLoading');
             var resulte = data.recommend_feeds;
-            commit('setMovieCards',resulte)
+            store.commit('setMovieCards',resulte)
         })
-    }
+    },
+    setIsLogin({commit},username){
+        commit('setIsLogin',username)
+    },
+    setActive({commit},active){
+        commit('setActive',active);
+    },
+    setFooter({commit}){
+        commit('setFooter')
+    },
+    //喜欢
+    setBookCollection({commit},bookCollection){
+        commit('setBookCollection',bookCollection)
+    },
+    setMovieCollection({commit},movieCollection){
+        commit('setMovieCollection',movieCollection)
+    },
+    setMusicCollection({commit},musicCollection){
+        commit('setMusicCollection',musicCollection)
+    },
+    //图书购买
+    setBuyBook({commit},buyBook){
+        commit('setBuyBook',buyBook)
+    },
+    //充值金额
+    setRechargePrice({commit},price){
+        commit('setRechargePrice',price)
+    },
+    updatePrice(store,price){
 
+        return new Promise(function (relove,reject) {
+            if(store.getters.RechargePrice<price){
+                reject()
+            }else{
+                store.commit('updatePrice',price)
+                relove();
+            }
+        })
+
+    }
 }

@@ -41,7 +41,8 @@
                 htmlVal:'暂无评分',
                 str:'',
                 count:9,
-                element:''
+                element:'',
+                isAction:false
             }
         },
         computed:mapGetters([
@@ -54,6 +55,7 @@
             var arr = window.location.href.split('/');
             var str = arr[arr.length-1];
             if(str.includes('V')){
+                this.isAction = true;
                //电影
                 var movieArr = str.split('V');
                 this.element = movieArr[0]
@@ -129,6 +131,7 @@
                 }
             }
             if(str.includes('B')){
+                this.isAction = true;
                 //图书
                 var BookArr = str.split('B');
                 this.element = BookArr[0]
@@ -184,8 +187,10 @@
                 }
             }
             if(str.includes('M')){
+                this.isAction = true;
                 //音乐
                 var MusicArr = str.split('M');
+                this.element = MusicArr[0];
 
                 switch (MusicArr[1]){
                     case 'pop':
@@ -222,32 +227,186 @@
                         break;
                 }
             }
+
+            if(str.includes('G')){
+                this.isAction = false;
+                //游戏
+                var GameArr = str.split('G');
+                this.element = GameArr[0];
+                switch (GameArr[1]){
+                    case 'action':
+                        this.title = '动作类';
+                        this.str = 'game_action_hot';
+                        break;
+                    case 'rpg':
+                        this.title = '角色扮演类';
+                        this.str = 'game_role_hot';
+                        break;
+                    case 'arcade':
+                        this.title = 'Arcade/街机';
+                        this.str = 'game_platform_arcade';
+                        break;
+                    case 'adventure':
+                        this.title = '冒险类';
+                        this.str = 'game_adventure_hot';
+                        break;
+                    case 'shooting':
+                        this.title = '射击类';
+                        this.str = 'game_shoot_hot';
+                        break;
+                    case 'simulation':
+                        this.title = '模拟类';
+                        this.str = 'game_simulation_app';
+                        break;
+                    case 'sports':
+                        this.title = '体育类';
+                        this.str = 'game_sports_hot';
+                        break;
+                    case 'racing':
+                        this.title = '竞速类';
+                        this.str = 'game_racing_hot';
+                        break;
+                    case 'fighting':
+                        this.title = '格斗类';
+                        this.str = 'game_fighting_hot';
+                        break;
+                    case 'battle':
+                        this.title ='清版／乱斗类';
+                        this.str = 'game_battle';
+                        break;
+                    case 'rts':
+                        this.title = '即时战略类';
+                        this.str ='game_rts_hot';
+                        break;
+                    case 'mug':
+                        this.title = '音乐／旋律类';
+                        this.str = 'game_mug_hot';
+                        break;
+                }
+            }
+            if(str.includes('P')){
+                this.isAction = false;
+                //游戏第二行
+                var GameArr2 = str.split('P');
+                this.element = GameArr2[0];
+
+                switch (GameArr2[1]){
+                    case 'mac':
+                        this.title = 'Mac';
+                        this.str = 'game_platform_mac'
+                        break;
+                    case 'pc':
+                        this.title = 'PC';
+                        this.str = 'game_platform_pc'
+                        break;
+                    case 'iphone':
+                        this.title = 'iPhone';
+                        this.str = 'game_platform_iphone'
+                        break;
+                    case 'ipad':
+                        this.title = 'iPad';
+                        this.str = 'game_platform_ipad'
+                        break;
+                    case 'android':
+                        this.title = 'Android';
+                        this.str = 'game_platform_android'
+                        break;
+                    case 'ps4':
+                        this.title = 'PS4';
+                        this.str = 'game_platform_ps4'
+                        break;
+                    case 'xboxone':
+                        this.title = 'XboxOne';
+                        this.str = 'game_platform_xboxone'
+                        break;
+                    case 'wiiu':
+                        this.title = 'Wii U';
+                        this.str = 'game_platform_wiiu'
+                        break;
+                    case 'ps3':
+                        this.title = 'PS3';
+                        this.str = 'game_platform_ps3'
+                        break;
+                    case 'xbox360':
+                        this.title = 'Xbox 360';
+                        this.str = 'game_platform_xbox360'
+                        break;
+                    case 'wii':
+                        this.title = 'Wii';
+                        this.str = 'game_platform_wii'
+                        break;
+                    case 'ps2':
+                        this.title = 'PS2';
+                        this.str = 'game_platform_ps2'
+                        break;
+                    case 'xbox':
+                        this.title = 'Xbox';
+                        this.str = 'game_platform_xbox'
+                        break;
+                    case 'ngc':
+                        this.title = 'NGC/GameCube';
+                        this.str = 'game_platform_ngc'
+                        break;
+                    case 'arcade':
+                        this.title = 'Arcade/街机';
+                        this.str = 'game_platform_arcade'
+                        break;
+                    case 'fc':
+                        this.title = 'FC/NES/红白机';
+                        this.str = 'game_platform_fc'
+                        break;
+
+                }
+            }
             this.getList()
         },
         methods:{
             getList(){
                 var _this = this;
                 this.$store.dispatch('showLoading')
-                JSONP.getJSON('https://m.douban.com/rexxar/api/v2/subject_collection/filter_'+this.str+'_hot/items?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=108288&_=1503804608094',null,function (data) {
-                    _this.$store.dispatch('hideLoading')
-                    var result = data.subject_collection_items;
-                    for(var i=0;i<result.length;i++){
-                        if(!result[i].rating){
-                            result[i].rating = {
-                                value:0
-                            };
+                if(this.isAction){
+                    JSONP.getJSON('https://m.douban.com/rexxar/api/v2/subject_collection/filter_'+this.str+'_hot/items?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=108288&_=1503804608094',null,function (data) {
+                        _this.$store.dispatch('hideLoading')
+                        var result = data.subject_collection_items;
+                        for(var i=0;i<result.length;i++){
+                            if(!result[i].rating){
+                                result[i].rating = {
+                                    value:0
+                                };
+                            }
+                            var start = Math.round(result[i].rating.value/2);
+                            if(start==0){
+                                result[i].isOff = false
+                            }else{
+                                result[i].isOff = true
+                            }
+                            result[i].index = start;
                         }
-                        var start = Math.round(result[i].rating.value/2);
-                        if(start==0){
-                            result[i].isOff = false
-                        }else{
-                            result[i].isOff = true
-                        }
-                        result[i].index = start;
-                    }
-                    _this.$store.dispatch('setNewLists',result)
+                        _this.$store.dispatch('setNewLists',result)
 
-                })
+                    })
+                }else{
+                    JSONP.getJSON('https://m.douban.com/rexxar/api/v2/subject_collection/'+this.str+'/items?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=108288&_=1503804608094',null,function (data) {
+                        _this.$store.dispatch('hideLoading')
+                        var result = data.subject_collection_items;
+                        for(var i=0;i<result.length;i++){
+                            if(!result[i].rating){
+                                result[i].rating = {
+                                    value:0
+                                };
+                            }
+                            var start = Math.round(result[i].rating.value/2);
+                            if(start==0){
+                                result[i].isOff = false
+                            }else{
+                                result[i].isOff = true
+                            }
+                            result[i].index = start;
+                        }
+                        _this.$store.dispatch('setNewLists',result)
+
+                    })
+                }
             },
             showAll(str){
 //                var _this = this;

@@ -61,10 +61,11 @@
                     _this.Europe = result
                 });
                 JSONP.getJSON('https://m.douban.com/rexxar/api/v2/subject_collection/music_japan_korea/items?os=ios&callback=jsonp3&start=0&count=8&loc_id=0&_=1503969760614',null,function (data) {
+                    _this.$store.dispatch('hideLoading')
                     var result = data.subject_collection_items;
                     _this.japan = result
                 })
-                this.$store.dispatch('hideLoading')
+
             }
         }
     }

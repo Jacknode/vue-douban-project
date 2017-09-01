@@ -16,17 +16,23 @@ import Movie from './components/Movie.vue'
 import MovieDetail from './components/MovieDetail.vue'
 import BookList from './components/BookList.vue'
 import Game from './components/Game.vue'
+import GameDetail from './components/GameDetail.vue'
+import Admin from './components/Admin.vue'
+import Collection from './components/Collection.vue'
+import Orders from './components/Orders.vue'
+import Recharge from './components/Recharge.vue'
+import Wallet from './components/Wallet.vue'
 
 
 
 export default [
     {
         path:'/',
-        component:Home
+        component:Movie
     },
     {
         path:'/movie',
-        component:Movie
+        component:Home
     },
     {
         path:'/list/:title',
@@ -107,7 +113,7 @@ export default [
     {
         path:'/home/detail',
         name:'MovieDetail',
-        component:MovieDetail
+        component:GameDetail
     },
     {
         path:'/booklist/:name',
@@ -121,5 +127,44 @@ export default [
         path:'/game',
         name:'Game',
         component:Game
+    },
+    {
+        path:'/newList/detail/music/:id',
+        name:'newListMusicDetail',
+        component:MusicDetail
+    },
+    {
+        path:'/newList/detail/game/:id',
+        name:'newListGameDetail',
+        component:GameDetail
+    },
+    {
+        path:'/admin',
+        name:'Admin',
+        component:Admin
+    },
+    //收藏
+    {
+        path:'/collection',
+        name:'Collection',
+        component:Collection
+    },
+    //订单
+    {
+        path:'/orders',
+        name:'Orders',
+        component:Orders
+    },
+    //充值
+    {
+        path:'/recharge',
+        name:'Recharge',
+        component:Recharge
+    },
+    //钱包
+    {
+        path:'/wallet',
+        name:'Wallet',
+        component:Wallet
     }
 ]

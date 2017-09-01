@@ -21,9 +21,9 @@
 </template>
 <style scoped>
 	.loader {
-		background: rgba(0,0,0,.3);
-		background: -webkit-radial-gradient(#222, rgba(0,0,0,.3));
-		background: radial-gradient(#222, rgba(0,0,0,.3));
+		background: rgba(0,0,0,.8);
+		background: -webkit-radial-gradient(#222, rgba(0,0,0,.8));
+		background: radial-gradient(#222, rgba(0,0,0,.8));
 		bottom: 0;
 		left: 0;
 		overflow: hidden;

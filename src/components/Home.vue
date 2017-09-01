@@ -9,6 +9,7 @@
           <ContentView :banner="UpcomingList" title="新片榜" itemStr="new_movies"></ContentView>
           <ContentView :banner="TopList" title="Top250" itemStr="top250"></ContentView>
           <FooterList :footerList="footerList" itemStr="moive"></FooterList>
+          <div class="con"></div>
       </div>
     </section>
   </div>
@@ -67,7 +68,6 @@ export default{
             var _this = this;
             this.$http.get('/list/in_theaters?start=0&count=8').then(function (data) {
                 var result = data.data.subjects;
-                console.log(result)
                 _this.bannerList = result
 
                 for(var i=0;i<result.length;i++){
@@ -110,3 +110,9 @@ export default{
     }
 }
 </script>
+<style scoped>
+    .con{
+        height: 50px;
+        width: 100%;
+    }
+</style>

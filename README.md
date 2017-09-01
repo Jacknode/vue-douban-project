@@ -58,3 +58,7 @@ vue,vuex,vue-router,axios,muse-ui,webpack,vue-scroller
 > 8. 音乐的首页和详情页和列表页还有下面的导航切换路由
 
 > 9. 接口获取方式采用axios和JSONP和后端代理
+
+> 10. 图书、视频、音乐收藏功能实现
+
+> 11. 支付、充值功能模拟功能
