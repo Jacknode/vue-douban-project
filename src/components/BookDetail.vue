@@ -165,7 +165,6 @@
         border: 1px solid green;
         text-align: center;
         line-height: 30px;
-
         border-radius: 10px;
         background: #fff;
         color: green;

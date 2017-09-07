@@ -4,6 +4,6 @@ export default {
         return str;
     },
     newApi(str){
-        return '/api.php'+str;
+        return '/api.php/'+str;
     }
 }

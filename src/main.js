@@ -37,7 +37,7 @@ axios.interceptors.response.use(function (response) { //配置请求回来的信
 Vue.prototype.$http = axios;
 
 var router = new VueRouter({
-    mode:'history',
+    // mode:'history',
     routes:routerConfig
 })
 

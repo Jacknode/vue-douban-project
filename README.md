@@ -40,12 +40,12 @@ vue,vuex,vue-router,axios,muse-ui,webpack,vue-scroller
 > 3. 开始编写入口文件和路由还有axios
 
 > 4. 电影的首页,列表页,详情页的组件和功能   功能如下
-     - 路由跳转和loading组件的显示和隐藏用的vuex
-     - vuex 的分布式管理和统一导出，方便管理和维护
-     - vue-router放在一个router.config的文件中方便管理和维护
-     - components 放的是整个项目用到的自定义组件和项目组件
-     - assets 是静态资源管理文件
-     - 上拉加载更多
+         + 路由跳转和loading组件的显示和隐藏用的vuex
+         + vuex 的分布式管理和统一导出，方便管理和维护
+         + vue-router放在一个router.config的文件中方便管理和维护
+         + components 放的是整个项目用到的自定义组件和项目组件
+         + assets 是静态资源管理文件
+         + 上拉加载更多
 
 > 5. 搜索实现了点击加载更多
 
@@ -62,3 +62,9 @@ vue,vuex,vue-router,axios,muse-ui,webpack,vue-scroller
 > 10. 图书、视频、音乐收藏功能实现
 
 > 11. 支付、充值功能模拟功能
+
+> 12. 豆瓣图片的防盗链问题 解决方法：给img标签添加 referrerpolicy="no-referrer"
+
+# 豆瓣app在线预览二维码
+
+![豆瓣手机版app](static/douban.png)

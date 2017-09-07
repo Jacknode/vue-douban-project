@@ -22,7 +22,7 @@
                 <div class="clear"></div>
                 <div class="top" :class="{show:isShow}">添加成功</div>
                 <div class="login" :class="{addLogin:isLog}">请先登录！</div>
-                <div class="Collection" @touchstart="Collection">收藏</div>
+                <div class="Collection" @touchstart="Collection" :class="{disable:isDisable}">收藏</div>
                 <p class="title">{{MusicDetails.title}}的唱片简介</p>
                 <p>{{MusicDetails.summary}}</p>
                 <BookComments :reviews="musicComments"></BookComments>
@@ -48,6 +48,7 @@
                 addCollection:true,
                 isShow:false,
                 isLog:false,
+                isDisable:false
             }
         },
         computed:mapGetters([
@@ -97,6 +98,7 @@
                         this.$store.dispatch('setMusicCollection',this.$store.getters.MusicDetails);
                         this.addCollection = false;
                         this.isShow = true;
+                        this.isDisable = true;
                         setTimeout(()=>{
                             this.isShow = false;
                         },2000)
@@ -136,8 +138,8 @@
         border: 1px solid green;
         text-align: center;
         line-height: 30px;
-        background: green;
-        color: #fff;
+        background: #fff;
+        color: green;
         border-radius: 10px;
     }
     .top{
@@ -169,5 +171,9 @@
     .addLogin{
         top:1rem;
         opacity: 1;
+    }
+    .disable{
+        background: green;
+        color: #fff;
     }
 </style>

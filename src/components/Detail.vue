@@ -23,10 +23,10 @@
                     <img :src="details.images.small" alt="">
                 </div>
                 <div class="clear"></div>
-                <div class="top" :class="{show:isShow}">添加成功</div>
+                <div class="top" :class="{show:isShow}">收藏成功</div>
                 <div class="login" :class="{addLogin:isLog}">请先登录！</div>
                 <div class="add">
-                    <div class="Collection" @touchstart="Collection">收藏</div>
+                    <div class="Collection" @touchstart="Collection" :class="{disable:isDisable}">收藏</div>
                 </div>
                 <p class="title">{{details.title}}的剧情简介</p>
                 <p>{{details.summary}}</p>
@@ -62,6 +62,7 @@ let moreLoaded = true;
                 addCollection:true,
                 isShow:false,
                 isLog:false,
+                isDisable:false
             }
         },
         components:{
@@ -115,6 +116,7 @@ let moreLoaded = true;
                         this.$store.dispatch('setMovieCollection',this.$store.getters.details)
                         this.addCollection = false;
                         this.isShow = true;
+                        this.isDisable = true;
                         setTimeout(()=>{
                             this.isShow = false;
                         },2000)
@@ -147,8 +149,8 @@ let moreLoaded = true;
         border: 1px solid green;
         text-align: center;
         line-height: 30px;
-        background: green;
-        color: #fff;
+        background: #fff;
+        color: green;
         border-radius: 10px;
     }
     .top{
@@ -189,5 +191,9 @@ let moreLoaded = true;
     .addLogin{
         top:1rem;
         opacity: 1;
+    }
+    .disable{
+        background: green;
+        color: #fff;
     }
 </style>
