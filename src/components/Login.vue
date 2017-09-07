@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="content">
-            <mu-auto-complete hintText="邮箱 / 手机号 / 用户名" labelFloat label="邮箱 / 手机号 / 用户名" fullWidth @input="username"/>
-            <mu-auto-complete hintText="密码" labelFloat label="密码" fullWidth @input="password"/>
+            <mu-auto-complete hintText="邮箱 / 手机号 / 用户名" labelFloat :label="str" fullWidth @input="username"/>
+            <mu-text-field label="密码" hintText="密码" @input="password" type="password"/>
         </div>
         <div class="top" v-text="text" :class="{green:isShow,red:isRed}"></div>
         <mu-raised-button label="登录" class="demo-raised-button" primary :fullWidth="true" @click="loginItem"/>
@@ -24,7 +24,8 @@
                 topPopup:false,
                 isShow:false,
                 text:'',
-                isRed:false
+                isRed:false,
+                str:'邮箱 / 手机号 / 用户名'
             }
         },
         computed:mapGetters([
@@ -32,9 +33,25 @@
         ]),
         methods: {
             username (val) {
+                if(val==''){
+                    this.text = '不能输入空';
+                    this.isRed = true;
+                    setTimeout(()=>{
+                        this.isRed = false;
+                    },2000)
+                    return;
+                }
                 this.usernameVal = val;
             },
             password(val){
+                if(val==''){
+                    this.text = '不能输入空';
+                    this.isRed = true;
+                    setTimeout(()=>{
+                        this.isRed = false;
+                    },2000)
+                    return;
+                }
                 this.passwordVal = val
             },
             loginCeItem(){

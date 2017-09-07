@@ -4,6 +4,8 @@
 
 import getters from './getters'
 
+
+
 const state = {
     loadingShow:false,
     reviews:[],
@@ -42,7 +44,11 @@ const state = {
     //购买图书
     BuyBooks:[],
     //充值金额
-    RechargePrice:0
+    RechargePrice:0,
+    //已购买
+    Purchased:[],
+    newArrList:[],
+    newArrList2:[]
 };
 const mutations = {
     showLoading(state){
@@ -114,7 +120,7 @@ const mutations = {
     setFooter(state){
         state.showFooter = false;
     },
-    //喜欢
+    //收藏
     setBookCollection(state,bookCollection){
         state.BookCollection.push(bookCollection);
     },
@@ -135,8 +141,32 @@ const mutations = {
     //扣款
     updatePrice(state,price){
         state.RechargePrice -=price;
+    },
+    updateRechargePrice(state,data){
+        var newData = Array.from(data);
+        state.Purchased = state.BuyBooks;
+
+        state.BuyBooks = state.BuyBooks.filter((item)=>{
+            newData.forEach(dataId=>{
+                if(item.id==dataId){
+                    return true
+                }
+            })
+            return false
+        })
+    },
+    //清空已购买
+    clearPurchased(state){
+        state.Purchased = [];
+    },
+    getArrlist1(state,data){
+        state.newArrList = data
+    },
+    getArrlist2(state,data){
+        state.newArrList2 = data
     }
 };
+
 export default {
     state,
     mutations,

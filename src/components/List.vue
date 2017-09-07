@@ -57,7 +57,7 @@
          methods:{
              getList(str){
                  var _this = this;
-                 this.$http.get('/list/'+str+'?start=0&count='+_this.count+'').then(function (data) {
+                 this.$http.get('/api.php/list/'+str+'?start=0&count='+_this.count+'').then(function (data) {
                      var result = data.data.subjects;
                      for(var i=0;i<result.length;i++){
                          var start = Math.round(result[i].rating.average/2);
@@ -73,7 +73,7 @@
              },
              showAll(str){
                  var _this = this;
-                 this.$http.get('/list/'+str+'').then(function (data) {
+                 this.$http.get('/api.php/list/'+str+'').then(function (data) {
                      var result = data.data.subjects;
                      for(var i=0;i<result.length;i++){
                          var start = Math.round(result[i].rating.average/2);

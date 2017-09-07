@@ -1,36 +1,15 @@
 <template>
     <div>
-        <div id="wrap">
-            <div class="scroll">
-                <mu-text-field label="搜索" hintText="输入关键字" @change="changeVal"/><br/>
-                <br>
-                <div class="card" v-show="showCard">
-                    <h3>影视</h3>
-                    <ul class="list">
-                        <li v-for="item in inputList">
-                            <router-link :to="'detail/movie/'+item.id">
-                                <div class="left">
-                                    <img :src="item.images.small" alt="">
-                                </div>
-                                <div class="right">
-                                    <span>{{item.title}}</span>
-                                    <p>
-                                        <i class="fa fa-star active" v-for="a in item.index"></i>
-                                        <i class="fa fa-star" v-for="b in 5-item.index"></i>
-                                        <span class="num" v-if="item.rating.average!=0.0">{{item.rating.average}}</span>
-                                        <span class="num" v-else>评分人数不足</span>
-                                    </p>
-                                </div>
-                            </router-link>
-                        </li>
-
-                    </ul>
-                    <h2 @touchstart="loadAll" v-show="showLoadAll">加载更多{{num}}</h2>
-                </div>
-                <div class="card" v-show="showCard">
-                    <h3>图书</h3>
-                    <ul class="list">
-                        <li v-for="item in BookList">
+        <scroller
+            class="positions"
+        >
+            <mu-text-field label="搜索" hintText="输入关键字" @change="changeVal"/><br/>
+            <br>
+            <div class="card" v-show="showCard">
+                <h3>影视</h3>
+                <ul class="list">
+                    <li v-for="item in inputList">
+                        <router-link :to="'detail/movie/'+item.id">
                             <div class="left">
                                 <img :src="item.images.small" alt="">
                             </div>
@@ -42,23 +21,45 @@
                                     <span class="num" v-if="item.rating.average!=0.0">{{item.rating.average}}</span>
                                     <span class="num" v-else>评分人数不足</span>
                                 </p>
-
                             </div>
-                        </li>
-                    </ul>
-                    <h2 @touchstart="loadBookAll" v-show="showBookLoadAll">加载更多{{bookNum}}</h2>
-                </div>
+                        </router-link>
+                    </li>
+
+                </ul>
+                <h2 @touchstart="loadAll" v-show="showLoadAll">加载更多{{num}}</h2>
             </div>
-        </div>
+            <div class="card" v-show="showCard">
+                <h3>图书</h3>
+                <ul class="list">
+                    <li v-for="item in BookList">
+                        <div class="left">
+                            <img :src="item.images.small" alt="">
+                        </div>
+                        <div class="right">
+                            <span>{{item.title}}</span>
+                            <p>
+                                <i class="fa fa-star active" v-for="a in item.index"></i>
+                                <i class="fa fa-star" v-for="b in 5-item.index"></i>
+                                <span class="num" v-if="item.rating.average!=0.0">{{item.rating.average}}</span>
+                                <span class="num" v-else>评分人数不足</span>
+                            </p>
+
+                        </div>
+                    </li>
+                </ul>
+                <h2 @touchstart="loadBookAll" v-show="showBookLoadAll">加载更多{{bookNum}}</h2>
+            </div>
+            <div class="con"></div>
+        </scroller>
     </div>
 </template>
 <script>
     import {mapGetters} from 'vuex'
-    import banner from '../assets/js/index'
+    import obj from '../assets/js/api'
 
     export default {
         computed:mapGetters([
-           'inputList',
+            'inputList',
             'showLoadAll',
             'BookList',
             'showBookLoadAll'
@@ -73,7 +74,6 @@
         },
         mounted(){
             this.getItem();
-            banner('none');
         },
         updated(){
         },
@@ -84,8 +84,7 @@
             changeVal(e,val){
                 this.newVal = val;
                 this.showCard = true;
-                this.$http.get('/list/search?q='+val+'').then((data)=>{
-                    console.log(data)
+                this.$http.get(obj.api('/list/search?q='+val+'')).then((data)=>{
                     var result = data.data.subjects;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);
@@ -98,11 +97,9 @@
                     }
                     this.num = result.length-2;
                     var arr = result.slice(0,2);
-                    console.log(arr)
                     this.$store.dispatch('setInputList',arr)
                 })
-                this.$http.get('/book/search?q='+val+'').then((data)=>{
-                    console.log(data)
+                this.$http.get(obj.api('/book/search?q='+val+'')).then((data)=>{
                     var result = data.data.books;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);
@@ -115,14 +112,12 @@
                     }
                     this.bookNum = result.length-2;
                     var arr = result.slice(0,2);
-                    console.log(arr)
                     this.$store.dispatch('setBookList',arr)
                 })
             },
             loadAll(){
                 this.$store.dispatch('hideLoadAll');
-                this.$http.get('/list/search?q='+this.newVal+'').then((data)=>{
-                    console.log(data)
+                this.$http.get(obj.api('/list/search?q='+this.newVal+'')).then((data)=>{
                     var result = data.data.subjects;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);
@@ -139,8 +134,7 @@
             },
             loadBookAll(){
                 this.$store.dispatch('hideBookLoadAll');
-                this.$http.get('/book/search?q='+this.newVal+'').then((data)=>{
-                    console.log(data)
+                this.$http.get(obj.api('/book/search?q='+this.newVal+'')).then((data)=>{
                     var result = data.data.books;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);
@@ -226,5 +220,13 @@
     li img {
         width: 3rem;
         height: 3rem;
+    }
+    .positions{
+        top:3rem !important;
+        margin-bottom: -3rem;
+        padding-left: 1rem;
+    }
+    .con{
+        height: 5rem;
     }
 </style>

@@ -74,56 +74,52 @@ header .header a.active {
 }
 header .header a.blue {
   color: #368be5;
+  font-size: 1rem;
 }
 header .header a.Earth {
   color: #997963;
+  font-size: 1rem;
 }
 header .header a.yellow {
   color: #dca732;
+  font-size: 1rem;
 }
 header .header a.danblue {
   color: #5ab5c9;
+  font-size: 1rem;
 }
 header .header a i {
   color: #5cb00a;
+  font-size: 1rem;
 }
-#wrap {
-  position: absolute;
-  top: 3rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  overflow: hidden;
-}
-#wrap .wrapContent {
+.wrapContent {
   margin-bottom: 0.5rem;
   height: 15.2rem;
   padding: 0 1rem;
 }
-#wrap .wrapContent .head {
+.wrapContent .head {
   height: 3rem;
   line-height: 3rem;
 }
-#wrap .wrapContent .head span:nth-of-type(1) {
+.wrapContent .head span:nth-of-type(1) {
   float: left;
 }
-#wrap .wrapContent .head a {
+.wrapContent .head a {
   float: right;
   color: #5eb61b;
 }
-#wrap .wrapContent .picAll {
+.wrapContent .picAll {
   width: 100%;
   height: 11.9rem;
   position: relative;
   overflow: hidden;
 }
-#wrap .wrapContent .picAll .pics {
+.wrapContent .picAll .pics {
   position: absolute;
   height: 100%;
   z-index: 2;
 }
-#wrap .wrapContent .picAll .pics a {
+.wrapContent .picAll .pics a {
   float: left;
   display: inline-block;
   width: 6rem;
@@ -131,11 +127,11 @@ header .header a i {
   position: relative;
   height: 100%;
 }
-#wrap .wrapContent .picAll .pics a img {
+.wrapContent .picAll .pics a img {
   width: 6rem;
   height: 9.1rem;
 }
-#wrap .wrapContent .picAll .pics a p:nth-of-type(1) {
+.wrapContent .picAll .pics a p:nth-of-type(1) {
   text-align: center;
   padding-top: 0.5rem;
   margin-bottom: 0.25rem;
@@ -144,60 +140,62 @@ header .header a i {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-#wrap .wrapContent .picAll .pics a p:nth-of-type(2) {
+.wrapContent .picAll .pics a p:nth-of-type(2) {
   vertical-align: top;
   padding-left: 0.7rem;
+  overflow: hidden;
+  padding-top: .13rem;
+  float: left;
 }
-#wrap .wrapContent .picAll .pics a p:nth-of-type(2) i {
+.wrapContent .picAll .pics a p:nth-of-type(2) i {
   float: left;
   font-size: 0.6rem;
   margin-right: 0.05rem;
 }
-#wrap .wrapContent .picAll .pics a span {
-  position: absolute;
-  right: 0.25rem;
-  bottom: 0;
+.wrapContent .picAll .pics a span {
+  padding-left: 0.15rem;
   font-size: 0.6rem;
+  float: left;
   vertical-align: top;
 }
-#wrap .wrapContent .picAll .pics a i.active {
+.wrapContent .picAll .pics a i.active {
   color: #f6b633;
 }
-#wrap .wrapNav {
+.wrapNav {
   margin-top: 2rem;
   width: 100%;
   height: 22.5rem;
 }
-#wrap .wrapNav .nav {
+.wrapNav .nav {
   line-height: 2.5rem;
   height: 2.5rem;
   padding-left: 1rem;
 }
-#wrap .wrapNav .nav .card {
+.wrapNav .nav .card {
   height: 2.5rem;
   border-top: 1px solid #f3f3f3;
 }
-#wrap .wrapNav .nav .card a {
+.wrapNav .nav .card a {
   height: 100%;
   display: inline-block;
   width: 9.3rem;
 }
-#wrap .wrapNav .nav .card a span:nth-of-type(1) {
+.wrapNav .nav .card a span:nth-of-type(1) {
   color: #5eb61b;
   float: left;
   padding-left: 0.5rem;
 }
-#wrap .wrapNav .nav .card a span:nth-of-type(2) {
+.wrapNav .nav .card a span:nth-of-type(2) {
   float: right;
   padding-right: 0.5rem;
 }
-#wrap .wrapNav .nav .card a span:nth-of-type(2) i {
+.wrapNav .nav .card a span:nth-of-type(2) i {
   font-size: 1.5rem;
 }
-#wrap .wrapNav .nav .card a:nth-of-type(1) {
+.wrapNav .nav .card a:nth-of-type(1) {
   border-right: 1px solid #f3f3f3  ;
 }
-#wrap .wrapNav .nav .card:last-child {
+.wrapNav .nav .card:last-child {
   border-bottom: 1px solid #f3f3f3;
 }
 #wrap {

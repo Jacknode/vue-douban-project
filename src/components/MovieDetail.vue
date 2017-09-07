@@ -4,7 +4,7 @@
             class="positions"
             ref="movieDetail"
         >
-            <h1>接口被小日本吃了！</h1>
+            <h1>接口不存在！</h1>
         </scroller>
     </div>
 </template>
@@ -15,7 +15,7 @@
 </script>
 <style scoped>
 .positions{
-    top:3rem
+    top:3rem !important
 }
     h1{
         padding-left: 20px;

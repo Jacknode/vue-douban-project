@@ -5,9 +5,9 @@ import Obj from './m.touch'
 
 export default function () {
   // 头部导航的动画
-  document.addEventListener('touchstart', function(e) {
-    e.preventDefault();
-  });
+  // document.addEventListener('touchstart', function(e) {
+  //   e.preventDefault();
+  // });
   var navWrap = document.querySelectorAll('.picAll');
   for(var i=0;i<navWrap.length;i++){
     tab(navWrap[i]);
@@ -28,13 +28,13 @@ export default function () {
     }
   }
 
-  var wrap = document.querySelector('#wrap');
-  Obj.mScroll({
-    wrap: wrap,
-    dir: 'y',
-    over: 'backOut',
-    showBar: false
-  })
+  // var wrap = document.querySelector('#wrap');
+  // Obj.mScroll({
+  //   wrap: wrap,
+  //   dir: 'y',
+  //   over: 'backOut',
+  //   showBar: false
+  // })
 }
 
 

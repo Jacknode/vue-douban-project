@@ -3,7 +3,7 @@
         <scroller
             class="positions"
             ref="bookDetail"
-            v-show="BuyBooks.length"
+            v-if="BuyBooks.length"
         >
 
             <div class="bookCards">
@@ -23,7 +23,7 @@
                         <span>{{book.publisher}}</span>
                     </div>
                     <br>
-                    <mu-checkbox label="选中" class="demo-checkbox" v-model="checkList" :nativeValue="book.price"/> <br/>
+                    <mu-checkbox label="选中" class="demo-checkbox" v-model="checkList" :nativeValue="book.price" @change="change(book.id)"/> <br/>
                 </router-link>
             </div>
 
@@ -40,6 +40,7 @@
                 </mu-dialog>
             <div class="ico"></div>
         </scroller>
+            <h2 v-else>购物车空空如也！</h2>
         <div class="top" :class="{show:isShow}">{{textVal}}</div>
     </div>
 </template>
@@ -53,7 +54,8 @@
                 dialog: false,
                 addCollection:true,
                 isShow:false,
-                textVal :''
+                textVal :'',
+                allId:[]
             }
         },
         created(){
@@ -98,6 +100,7 @@
                     console.log('支付成功')
                     this.textVal = '支付成功'
                     this.isShow = true;
+                    this.$store.dispatch('updateRechargePrice',this.allId)
                     setTimeout(()=>{
                         this.isShow = false;
                     },2000)
@@ -109,6 +112,11 @@
                         this.isShow = false;
                     },2000)
                 })
+            },
+            change(id){
+                if(!this.allId.includes(id)){
+                    this.allId.push(id);
+                }
             }
         },
         updated(){
@@ -226,4 +234,5 @@
         top:3rem;
         opacity: 1;
     }
+
 </style>

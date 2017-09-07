@@ -23,6 +23,7 @@
                             </router-link>
                         </a>
                     </div>
+                    <div class="con"></div>
                 </div>
             </div>
         </section>
@@ -427,11 +428,15 @@
         }
     }
 </script>
-<style scoped>
+<style scoped lang="less">
+    @r:20rem;
     .MwrapContent  a{
         color: #aaa;
     }
     .head span{
         font-size:1.5rem;
+    }
+    .con{
+        height: 160/@r;
     }
 </style>

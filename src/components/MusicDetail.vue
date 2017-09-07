@@ -1,7 +1,6 @@
 <template>
     <div>
         <scroller
-            :on-refresh="refresh"
             class="positions"
             :on-infinite="infinite"
             ref="musicDetail"
@@ -22,7 +21,8 @@
                 </div>
                 <div class="clear"></div>
                 <div class="top" :class="{show:isShow}">添加成功</div>
-                <div class="Collection" @touchstart="Collection">喜欢</div>
+                <div class="login" :class="{addLogin:isLog}">请先登录！</div>
+                <div class="Collection" @touchstart="Collection">收藏</div>
                 <p class="title">{{MusicDetails.title}}的唱片简介</p>
                 <p>{{MusicDetails.summary}}</p>
                 <BookComments :reviews="musicComments"></BookComments>
@@ -46,13 +46,15 @@
             return {
                 id:this.$route.params.id,
                 addCollection:true,
-                isShow:false
+                isShow:false,
+                isLog:false,
             }
         },
         computed:mapGetters([
             'MusicDetails',
             'musicComments',
-            'newMusicReviews'
+            'newMusicReviews',
+            'isLogin'
         ]),
         mounted(){
             this.$store.dispatch('musicInfoList',this.id).then(()=>{
@@ -91,12 +93,20 @@
             },
             Collection(){
                 if(this.addCollection){
-                    this.$store.dispatch('setMusicCollection',this.$store.getters.MusicDetails);
-                    this.addCollection = false;
-                    this.isShow = true;
-                    setTimeout(()=>{
-                        this.isShow = false;
-                    },2000)
+                    if(this.isLogin){
+                        this.$store.dispatch('setMusicCollection',this.$store.getters.MusicDetails);
+                        this.addCollection = false;
+                        this.isShow = true;
+                        setTimeout(()=>{
+                            this.isShow = false;
+                        },2000)
+                    }else{
+                        this.isLog = true;
+                        setTimeout(()=>{
+                            this.isLog = false;
+                            this.$router.push({path:'/login'})
+                        },2000)
+                    }
                 }
             }
         },
@@ -111,7 +121,7 @@
         color: #aaa;
     }
     .positions{
-        top:3rem;
+        top:3rem !important;
         margin-bottom: -3rem;
     }
     .EssayHeader i{
@@ -133,7 +143,7 @@
     .top{
         position: absolute;
         left: 160/@r;
-        top:1rem;
+        top:-2rem;
         transition: .5s;
         background: green;
         color: #fff;
@@ -142,6 +152,22 @@
         font-size:12px;
     }
     .show{
-        top:4rem;
+        top:1rem;
+    }
+    .login{
+        position: absolute;
+        left: 130/@r;
+        top:-2rem;
+        opacity: 0;
+        transition: .5s;
+        background: #f60;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size:12px;
+    }
+    .addLogin{
+        top:1rem;
+        opacity: 1;
     }
 </style>

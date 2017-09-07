@@ -22,6 +22,7 @@ import Collection from './components/Collection.vue'
 import Orders from './components/Orders.vue'
 import Recharge from './components/Recharge.vue'
 import Wallet from './components/Wallet.vue'
+import Purchased from './components/Purchased.vue'
 
 
 
@@ -90,11 +91,13 @@ export default [
         name:'newListBookDetail',
         component:BookDetail
     },
+    //登录
     {
         path:'/login',
         name:'Login',
         component:Login
     },
+    //注册
     {
         path:'/Registration',
         name:'Registration',
@@ -166,5 +169,12 @@ export default [
         path:'/wallet',
         name:'Wallet',
         component:Wallet
+    },
+    //已购买
+    {
+        path:'/purchased',
+        name:'Purchased',
+        component:Purchased
     }
 ]
+

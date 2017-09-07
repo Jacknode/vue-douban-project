@@ -3,6 +3,7 @@
  */
 import axios from 'axios'
 import JSONP from '../assets/js/JSONP'
+import obj from '../assets/js/api'
 
 export default {
     showLoading({commit}){
@@ -42,12 +43,12 @@ export default {
     getTopList({commit},id){
         return new Promise(function (resolve,reject) {
             //电影条目信息
-            axios.get('/list/subject/'+id+'?apikey=0b2bdeda43b5688921839c8ecb20399b').then((data)=>{
+            axios.get(obj.api('/list/subject/'+id+'?apikey=0b2bdeda43b5688921839c8ecb20399b')).then((data)=>{
                 var result = data.data;
                 commit('setDetails',result)
             })
             //短评条目列表
-            axios.get('/list/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=2').then((data)=>{
+            axios.get(obj.api('/list/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=2')).then((data)=>{
                 var reviews = data.data.reviews;
                 if(reviews.length){
                     for(var i=0;i<reviews.length;i++){
@@ -74,7 +75,7 @@ export default {
     loadMoreList(store,{ page, count,id}){
         // console.log(page,count,id)
         return new Promise(function (resolve,reject) {
-            axios.get('/list/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start='+page+'&count='+count+'').then((data)=>{
+           axios.get(obj.api('/list/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start='+page+'&count='+count+'')).then((data)=>{
                 var reviews = data.data.reviews;
                 if(reviews.length){
                     for(var i=0;i<reviews.length;i++){
@@ -112,7 +113,9 @@ export default {
     },
     setBookReviewsList(store,{page,count,id}){
         return new Promise(function(resolve,reject) {
+            store.dispatch('showLoading')
             JSONP.getJSON('https://m.douban.com/rexxar/api/v2/book/'+id+'/interests?start='+page+'&callback=json1&count='+count+'',null,function (data) {
+                store.dispatch('hideLoading')
                 var result = data.interests;
                 for(var i=0;i<result.length;i++){
                     if(!result[i].rating){
@@ -129,6 +132,7 @@ export default {
                     result[i].index = start;
                 }
                 result = result.slice(count-2);
+                console.log(result)
                 store.commit('setBookReviewsLists',result);
                 if(store.getters.newBookReviews.length){
                     resolve();
@@ -165,8 +169,9 @@ export default {
             resolve();
         })
     },
-    musicInfoList({commit},id){
+    musicInfoList(store,id){
         return new Promise(function (resolve,reject) {
+            store.dispatch('showLoading')
             JSONP.getJSON('https://api.douban.com/v2/music/'+id+'?apikey=0b2bdeda43b5688921839c8ecb20399b&callback=json1',null,function (data) {
                     var start = Math.round(data.rating.average/2);
                     if(start==0){
@@ -175,9 +180,10 @@ export default {
                         data.isOff = true
                     }
                 data.index = start;
-                commit('setMusicDetails',data);
+                store.commit('setMusicDetails',data);
             })
             JSONP.getJSON('https://m.douban.com/rexxar/api/v2/music/'+id+'/interests?count=4&start=0&callback=json2',null,function (data) {
+                store.dispatch('hideLoading')
                 var result = data.interests;
                 if(result.length){
                     for(var i=0;i<result.length;i++){
@@ -195,14 +201,16 @@ export default {
                         result[i].index = start;
                     }
                 }
-                commit('setMusicComments',result)
+                store.commit('setMusicComments',result)
             })
             resolve();
         })
     },
-    setMusicReviewsList({commit},{page,count,id}){
+    setMusicReviewsList(store,{page,count,id}){
         return new Promise(function (resolve,reject) {
+            store.dispatch('showLoading')
             JSONP.getJSON('https://m.douban.com/rexxar/api/v2/music/'+id+'/interests?count='+count+'&start='+page+'&callback=json2',null,function (data) {
+                store.dispatch('hideLoading')
                 var result = data.interests;
                 if(result.length){
                     for(var i=0;i<result.length;i++){
@@ -221,7 +229,7 @@ export default {
                     }
                 }
                 result = result.slice(count-2);
-                commit('setMusicCommentsList',result);
+                store.commit('setMusicCommentsList',result);
                 resolve();
             })
         })
@@ -253,6 +261,7 @@ export default {
     },
     setMusicCollection({commit},musicCollection){
         commit('setMusicCollection',musicCollection)
+        commit('setMusicCollection',musicCollection)
     },
     //图书购买
     setBuyBook({commit},buyBook){
@@ -273,5 +282,22 @@ export default {
             }
         })
 
+    },
+    //处理结算后
+    updateRechargePrice({commit},val){
+        commit('updateRechargePrice',val)
+    },
+    getArrLists(store){
+        store.dispatch('showLoading');
+        JSONP.getJSON('https://m.douban.com/rexxar/api/v2/subject_collection/book_fiction/items?os=ios&callback=jsonp1&start=0&count=8&loc_id=0&_=1504696246739',null,function (data) {
+            var result = data.subject_collection_items;
+            store.commit('getArrlist1',result)
+        })
+        JSONP.getJSON('https://m.douban.com/rexxar/api/v2/subject_collection/book_nonfiction/items?os=ios&callback=jsonp2&start=0&count=8&loc_id=0&_=1504696246742',null,function (data) {
+            store.dispatch('hideLoading');
+            var result = data.subject_collection_items;
+            store.commit('getArrlist2',result)
+        })
     }
 }
+

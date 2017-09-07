@@ -3,10 +3,12 @@
         <div class="content">
             <h1>欢迎加入豆瓣</h1>
             <mu-auto-complete hintText="邮箱 / 手机号 / 用户名" labelFloat label="邮箱 / 手机号 / 用户名" fullWidth @input="username"/>
-            <mu-auto-complete hintText="密码最少6位" labelFloat label="密码最少6位" fullWidth @input="password"/>
+
+            <!--<mu-auto-complete hintText="密码最少6位" labelFloat label="密码最少6位" fullWidth @input="password"/>-->
+            <mu-text-field label="密码最少6位" hintText="密码最少6位" @input="password" type="password"/>
         </div>
         <div class="top" v-text="text" :class="{green:isShow}"></div>
-        <mu-raised-button label="注册" class="demo-raised-button" primary :fullWidth="true" @click="loginItem"/>
+        <mu-raised-button label="注册" class="demo-raised-button" primary :fullWidth="true" @touchstart.native="loginItem"/>
         <router-link  to="/Registration">
         </router-link>
 
@@ -38,7 +40,7 @@
                 this.text = '注册成功'
                 setTimeout(()=>{
                     this.isShow = false;
-                    window.location.href = 'http://localhost:8080/login'
+                    this.$router.push({path:'/login'})
                 },2000)
 //                if(this.loginCeItem()){
 //                    this.isShow = true;

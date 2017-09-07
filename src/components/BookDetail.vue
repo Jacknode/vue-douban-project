@@ -1,7 +1,6 @@
 <template>
     <div>
         <scroller
-            :on-refresh="refresh"
             class="positions"
             :on-infinite="infinite"
             ref="bookDetail"
@@ -28,8 +27,8 @@
                 <div class="buy" :class="{addBuy:isBuy}">添加到购物车成功</div>
                 <div class="login" :class="{addLogin:isLog}">请先登录！</div>
                 <div class="add">
-                    <div class="Collection" @touchstart="Collection">收藏</div>
-                    <div class="red" @touchstart="Buy">购买</div>
+                    <div class="Collection" @touchstart="Collection" :class="{disable:isDisable}">收藏</div>
+                    <div class="red" @touchstart="Buy" :class="{disableBuy:isDisableBuy}">购买</div>
                 </div>
                 <p class="title">{{BookDetails.title}}的内容简介</p>
                 <p>{{BookDetails.summary}}</p>
@@ -58,7 +57,9 @@
                 isShow:false,
                 isBuy:false,
                 addBuyCollection:true,
-                isLog:false
+                isLog:false,
+                isDisable:false,
+                isDisableBuy:false
             }
         },
         computed:mapGetters([
@@ -85,7 +86,7 @@
                     return;
                 }
                 moreLoaded = false;
-                if(count==16){
+                if(count==20){
                     page++;
                     count = 0;
                 }
@@ -107,6 +108,7 @@
                     if(this.isLogin){
                         this.$store.dispatch('setBookCollection',this.$store.getters.BookDetails);
                         this.addCollection = false;
+                        this.isDisable = true;
                         this.isShow = true;
                         setTimeout(()=>{
                             this.isShow = false;
@@ -115,6 +117,7 @@
                         this.isLog = true;
                         setTimeout(()=>{
                             this.isLog = false;
+                            this.$router.push({path:'/login'})
                         },2000)
                     }
                 }
@@ -124,6 +127,7 @@
                     if(this.isLogin){
                         this.$store.dispatch('setBuyBook',this.$store.getters.BookDetails)
                         this.isBuy = true;
+                        this.isDisableBuy = true
                         this.addBuyCollection = false;
                         setTimeout(()=>{
                             this.isBuy = false;
@@ -132,6 +136,7 @@
                         this.isLog = true;
                         setTimeout(()=>{
                             this.isLog = false;
+                            this.$router.push({path:'/login'})
                         },2000)
                     }
                 }
@@ -148,7 +153,7 @@
         color: #aaa;
     }
     .positions{
-        top:3rem;
+        top:3rem !important;
         margin-bottom: -3rem;
     }
     .EssayHeader i{
@@ -160,9 +165,10 @@
         border: 1px solid green;
         text-align: center;
         line-height: 30px;
-        background: green;
-        color: #fff;
+
         border-radius: 10px;
+        background: #fff;
+        color: green;
     }
     .red {
         width: 100/@r;
@@ -170,28 +176,31 @@
         border: 1px solid #f60;
         text-align: center;
         line-height: 30px;
-        background: #f60;
-        color: #fff;
+        background: #fff;
+        color: #f60;
         border-radius: 10px;
     }
     .top{
         position: absolute;
         left: 160/@r;
-        top:1rem;
+        top:-2rem;
         transition: .5s;
         background: green;
         color: #fff;
+        opacity: 0;
         border-radius: 5px;
         padding: 5px 10px;
         font-size:12px;
     }
     .show{
-        top:4rem;
+        top:1rem;
+        opacity: 1;
     }
     .buy{
         position: absolute;
         left: 130/@r;
-        top:1rem;
+        top:-2rem;
+        opacity: 0;
         transition: .5s;
         background: #f60;
         color: #fff;
@@ -202,7 +211,8 @@
     .login{
         position: absolute;
         left: 130/@r;
-        top:1rem;
+        top:-2rem;
+        opacity: 0;
         transition: .5s;
         background: #f60;
         color: #fff;
@@ -211,10 +221,16 @@
         font-size:12px;
     }
     .addBuy{
-        top:4rem;
+        top:1rem;
+        opacity: 1;
     }
     .addLogin{
-        top:4rem;
+        top:1rem;
+        opacity: 1;
+    }
+    .LoginOp{
+        top:1rem;
+        opacity: 1;
     }
     .add{
         margin-bottom:20/@r;
@@ -222,5 +238,13 @@
         float: left;
         margin-right: 4px;
     }
+    }
+    .disable{
+        background: green;
+        color: #fff;
+    }
+    .disableBuy{
+        background:#f60 ;
+        color: #fff;
     }
 </style>

@@ -1,8 +1,11 @@
 <template>
     <div>
         <!--中间部分-->
-        <section id="wrap">
-            <div class="scroll">
+        <scroller
+            class="positions"
+        >
+        <!--<section id="wrap">-->
+            <!--<div class="scroll">-->
                 <div class="MwrapContent">
                     <div class="head">
                         <span>{{title}}</span>
@@ -23,8 +26,9 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        </section>
+            <!--</div>-->
+        <!--</section>-->
+        </scroller>
     </div>
 </template>
 <script>
@@ -76,5 +80,9 @@
 <style scoped>
     .MwrapContent  a{
         color: #aaa;
+    }
+    .positions{
+        top:3rem !important;
+        margin-bottom: -3rem;
     }
 </style>

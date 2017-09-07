@@ -101,7 +101,7 @@ export default{
 
 }
 .positions{
-    top:3rem;
+    top:3rem !important;
     margin-bottom: -3rem;
 }
 img{

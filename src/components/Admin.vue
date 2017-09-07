@@ -39,10 +39,10 @@
                             <span class="fa fa-credit-card-alt" style="color: #3a50ad"></span>
                             <p>钱包</p>
                         </router-link>
-                        <li>
-                            <span class="fa fa-dedent" style="color: #583aad"></span>
-                            <p>豆列</p>
-                        </li>
+                        <router-link to="/purchased" tag="li">
+                            <span class="fa fa-cart-arrow-down" style="color: #583aad"></span>
+                            <p>已购买</p>
+                        </router-link>
                         <router-link to="/recharge" tag="li">
                             <span class="fa fa-dollar " style="color: #583aad"></span>
                             <p>充值</p>
@@ -100,7 +100,7 @@
          }
     }
     .positions{
-        top:3rem;
+        top:3rem !important;
         height: auto;
         position: absolute;
     }

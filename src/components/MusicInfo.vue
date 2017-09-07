@@ -1,14 +1,14 @@
 <template>
     <div>
         <!--中间部分-->
-        <section id="wrap">
-            <div class="scroll">
-                <MusicBanner :MusicBanner="newAlbum" title="华语新碟榜"></MusicBanner>
-                <MusicBanner :MusicBanner="Europe" title="欧美新碟榜"></MusicBanner>
-                <MusicBanner :MusicBanner="japan" title="日韩新碟榜"></MusicBanner>
-                <FooterList :footerList="footerList" itemStr="music"></FooterList>
-            </div>
-        </section>
+        <scroller
+            class="positions"
+        >
+            <MusicBanner :MusicBanner="newAlbum" title="华语新碟榜"></MusicBanner>
+            <MusicBanner :MusicBanner="Europe" title="欧美新碟榜"></MusicBanner>
+            <MusicBanner :MusicBanner="japan" title="日韩新碟榜"></MusicBanner>
+            <FooterList :footerList="footerList" itemStr="music"></FooterList>
+        </scroller>
     </div>
 </template>
 <script>
@@ -71,5 +71,8 @@
     }
 </script>
 <style scoped>
-
+    .positions{
+        top:3rem !important;
+        margin-bottom: -3rem;
+    }
 </style>

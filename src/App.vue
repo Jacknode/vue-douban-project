@@ -66,6 +66,11 @@ export default {
 //        if(window.location.href.includes('/detail')){
 //            this.$store.dispatch('setFooter')
 //        }
+        var app = document.querySelector('#app');
+
+//        app.addEventListener('touchstart', function(e) {
+//            e.preventDefault();
+//        });
     },
     methods:{
     },

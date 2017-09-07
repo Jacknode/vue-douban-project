@@ -115,5 +115,15 @@ export default {
     //充值金额
     RechargePrice(state){
         return state.RechargePrice;
+    },
+    //已购买
+    Purchased(state){
+        return state.Purchased;
+    },
+    newArrList(state){
+        return state.newArrList
+    },
+    newArrList2(state){
+        return state.newArrList2;
     }
 }

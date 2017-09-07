@@ -1,8 +1,11 @@
 <template>
   <div id="Home">
     <!--中间部分-->
-    <section id="wrap">
-      <div class="scroll">
+    <!--<section id="wrap">-->
+      <!--<div class="scroll">-->
+          <scroller
+              class="positions"
+          >
           <ContentView :banner="bannerList" title="影院热映" itemStr="in_theaters">
           </ContentView>
           <ContentView :banner="UpcomingList" title="即将上映" itemStr="coming_soon"></ContentView>
@@ -10,15 +13,16 @@
           <ContentView :banner="TopList" title="Top250" itemStr="top250"></ContentView>
           <FooterList :footerList="footerList" itemStr="moive"></FooterList>
           <div class="con"></div>
-      </div>
-    </section>
+          </scroller>
+      <!--</div>-->
+    <!--</section>-->
   </div>
 </template>
 <script>
-//  console.log(css)
 import banner from '../assets/js/fn.js'
 import ContentView from './wrapContent.vue'
 import FooterList from './footerList.vue'
+import obj from '../assets/js/api'
 export default{
     name:'Home',
     data(){
@@ -66,7 +70,8 @@ export default{
     methods:{
         getItem(){
             var _this = this;
-            this.$http.get('/list/in_theaters?start=0&count=8').then(function (data) {
+
+            this.$http.get( obj.api('list/in_theaters?start=0&count=8')).then(function (data) {
                 var result = data.data.subjects;
                 _this.bannerList = result
 
@@ -75,7 +80,7 @@ export default{
                     _this.bannerList[i].index = start;
                 }
             })
-            this.$http.get('/list/coming_soon?start=0&count=8').then(function (data) {
+            this.$http.get(obj.api('list/coming_soon?start=0&count=8')).then(function (data) {
                 var result = data.data.subjects;
                 _this.UpcomingList = result
 
@@ -84,7 +89,7 @@ export default{
                     _this.UpcomingList[i].index = start;
                 }
             })
-            this.$http.get('/list/new_movies?start=0&count=8').then(function (data) {
+            this.$http.get(obj.api('list/new_movies?start=0&count=8')).then(function (data) {
                 var result = data.data.subjects;
                 _this.newMoveList = result
 
@@ -93,7 +98,7 @@ export default{
                     _this.newMoveList[i].index = start;
                 }
             })
-            this.$http.get('/list/top250?start=0&count=8').then(function (data) {
+            this.$http.get(obj.api('list/top250?start=0&count=8')).then(function (data) {
                 var result = data.data.subjects;
                 _this.TopList = result
 
@@ -114,5 +119,9 @@ export default{
     .con{
         height: 50px;
         width: 100%;
+    }
+    .positions{
+        top:3rem !important;
+        margin-bottom: -3rem;
     }
 </style>

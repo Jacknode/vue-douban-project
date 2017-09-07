@@ -80,7 +80,7 @@
 <style scoped lang="less">
 @r:20rem;
 .positions{
-    top:3rem
+    top:3rem !important;
 }
 h2{
     padding-left: 20/@r;
