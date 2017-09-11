@@ -69,7 +69,9 @@ export default {
         if(name.endsWith('/')){
             return !state.isHome;
         }
-
+        if(name.includes('/home/detail')){
+            return !state.isHome;
+        }
     },
     isBook(state){
         var name = state.activeName;
@@ -125,5 +127,25 @@ export default {
     },
     newArrList2(state){
         return state.newArrList2;
+    },
+    //首页详情
+    NewMovieCards(state){
+        return state.NewMovieCards
+    },
+    GameReviews(state){
+        return state.GameReviews
+    },
+    // 首页
+    bannerList(state){
+        return state.bannerList
+    },
+    UpcomingList(state){
+        return state.UpcomingList
+    },
+    newMoveList(state){
+        return state.newMoveList
+    },
+    TopList(state){
+        return state.TopList;
     }
 }

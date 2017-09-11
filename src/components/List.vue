@@ -12,7 +12,7 @@
                     <div class="MorePics">
                         <a href="javascript:;"  v-for="item in lists">
                             <router-link :to="'detail/'+item.id">
-                                <img :src="item.images.small" alt="">
+                                <img alt="" v-lazy="item.images.small">
                                 <p class="title">{{item.title}}</p>
                                 <p v-show="item.isOff">
                                     <i class="fa fa-star active" v-for="a in item.index"></i>

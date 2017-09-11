@@ -3,8 +3,8 @@
         <scroller
             class="positions"
         >
-            <router-link to="/home/detail" tag="div">
-                <div class="card" v-for="item in movieCards">
+            <router-link :to="'/home/detail/'+item.id" tag="div"  v-for="item in movieCards">
+                <div class="card">
                     <div :class="{cardLeft:item.target.cover_url,addWidth:!item.target.cover_url}" >
                         <p>{{item.title}}</p>
                         <p>
@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="cardRight" v-show="item.target.cover_url">
-                        <img :src="item.target.cover_url" alt="" referrerpolicy="no-referrer">
+                        <img  alt="" referrerpolicy="no-referrer" v-lazy="item.target.cover_url">
                     </div>
                     <div class="itemList">
                         <span>by {{item.target.author.name}}</span>

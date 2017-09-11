@@ -10,7 +10,7 @@
                 <div class="pics">
                     <a href="javascript:;"  v-for="item in bannerList">
                         <router-link :to="'detail/music/'+item.id">
-                            <img :src="item.cover.url" alt="">
+                            <img alt="" v-lazy="item.cover.url">
                             <p class="title">{{item.title}}</p>
                             <p v-show="item.isOff">
                                 <i class="fa fa-star active" v-for="a in item.index"></i>

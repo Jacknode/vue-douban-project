@@ -8,6 +8,7 @@ import VueRouter from 'vue-router'
 import store from './store/'
 import axios from 'axios'
 import vueScroll from 'vue-scroller'
+import VueLazyload from 'vue-lazyload'
 
 import '@/assets/css/font-awesome.min.css'
 import '@/assets/css/index.css'
@@ -15,6 +16,13 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 Vue.use(MuseUI)
 Vue.use(vueScroll)
+Vue.use(VueLazyload);
+
+Vue.use(VueLazyload, {
+    error: '@/assets/error.jpeg',//这个是请求失败后显示的图片
+    loading: '@/assets/loading.gif',//这个是加载的loading过渡效果
+    try: 2 // 这个是加载图片数量
+})
 
 Vue.use(VueRouter);
 Vue.use(loading);

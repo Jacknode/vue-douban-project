@@ -17,7 +17,7 @@
                             <i class="fa fa-star"></i>
                         </span>
                     <span>{{details.ratings_count}}人评价</span>
-                    <p>{{details.durations[0]}} / {{details.genres[0]}} / {{details.casts[0].name}}(导演) / <span v-for="item in details.casts">{{item.name}}/</span> /   {{details.year}}({{details.countries[0]}}) 上映</p>
+                    <p>{{details.durations?details.durations[0]:''}} / {{details.genres[0]}}  / <span v-for="item in details.casts">{{item.name}}/</span> /   {{details.year}}年({{details.countries?details.countries[0]:''}}) 上映</p>
                 </div>
                 <div class="right">
                     <img :src="details.images.small" alt="">
@@ -44,6 +44,7 @@
                 <Comments :reviews="newDetails"></Comments>
             </div>
         </scroller>
+        <!--<div class="showDiv"></div>-->
     </div>
 </template>
 <script>
@@ -74,12 +75,16 @@ let moreLoaded = true;
             'newDetails',
             'isLogin'
         ]),
-        mounted(){
+        created(){
             this.$store.dispatch('getTopList',this.id).then(() => {
                 setTimeout(() => {
                     firstLoaded = true;
                 }, 300);
             });
+
+
+        },
+        updated(){
         },
         methods:{
             refresh(){
@@ -196,4 +201,7 @@ let moreLoaded = true;
         background: green;
         color: #fff;
     }
+    /*.showDiv{*/
+        /*height: 3rem;*/
+    /*}*/
 </style>

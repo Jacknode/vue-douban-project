@@ -8,6 +8,7 @@
             </BookContentView>
             <BookContentView :banner="newArrList2" title="最受关注图书｜非虚构类" itemStr="nonfiction"></BookContentView>
             <FooterList :footerList="footerList" itemStr="book"></FooterList>
+            <div class="con"></div>
         </scroller>
     </div>
 </template>
@@ -93,5 +94,8 @@
     .positions{
         top:3rem !important;
         margin-bottom: -3rem;
+    }
+    .con{
+        height: 50/@r;
     }
 </style>

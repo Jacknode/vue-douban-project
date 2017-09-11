@@ -114,9 +114,9 @@ export default [
         component:MusicDetail
     },
     {
-        path:'/home/detail',
+        path:'/home/detail/:id',
         name:'MovieDetail',
-        component:GameDetail
+        component:MovieDetail
     },
     {
         path:'/booklist/:name',

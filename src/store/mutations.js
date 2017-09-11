@@ -48,7 +48,14 @@ const state = {
     //已购买
     Purchased:[],
     newArrList:[],
-    newArrList2:[]
+    newArrList2:[],
+    NewMovieCards:{},
+    GameReviews:[],
+    // 电影首页
+    bannerList:[],
+    UpcomingList:[],
+    newMoveList:[],
+    TopList:[],
 };
 const mutations = {
     showLoading(state){
@@ -164,6 +171,44 @@ const mutations = {
     },
     getArrlist2(state,data){
         state.newArrList2 = data
+    },
+    //首页详情
+    getNewMovieCards(state,id){
+        state.NewMovieCards = state.movieCards.filter(item=>{
+            if(item.id == id){
+                return true;
+            }
+        })[0]
+    },
+    getGameReviews(state,data){
+        for(var i=0;i<data.length;i++){
+            if(!data[i].rating){
+                data[i].rating = {
+                    value:0
+                }
+            }
+            var start = Math.floor(data[i].rating.value/2);
+            if(start==0){
+                data[i].isOff = false
+            }else{
+                data[i].isOff = true
+            }
+            data[i].index = start;
+        }
+        state.GameReviews = data;
+    },
+    //首页
+    getBannerlist(state,data){
+        state.bannerList = data
+    },
+    getUpcomingList(state,data){
+        state.UpcomingList = data;
+    },
+    getNewMoveList(state,data){
+        state.newMoveList = data
+    },
+    getTopList(state,data){
+        state.TopList = data
     }
 };
 

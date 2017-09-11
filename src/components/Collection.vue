@@ -5,7 +5,7 @@
             ref="bookDetail"
         >
             <div v-if="BookCollection.length||MovieCollection.length||MusicCollection.length">
-                <div class="bookCards" v-show="BookCollection.length">
+                <div class="bookCards Book" v-show="BookCollection.length">
                     <h2>图书</h2>
                     <router-link  v-for="book in BookCollection" class="card" tag="div" :to="'/detail/book/'+book.id">
                         <div class="cardLeft">
@@ -24,7 +24,7 @@
                     </router-link>
 
                 </div>
-                <div class="bookCards" v-show="MovieCollection.length">
+                <div class="bookCards movie" v-show="MovieCollection.length">
                     <h2>电影</h2>
                     <router-link  v-for="movie in MovieCollection" class="card" tag="div" :to="'/detail/movie/'+movie.id">
                         <div class="cardLeft">
@@ -37,8 +37,8 @@
                             <img :src="movie.images.small" alt="">
                         </div>
                         <div class="itemList">
-                            <span>分钟: <i style="color: green">{{movie.durations[0]}}</i></span>
-                            <span>语言: <i style="color: green">{{movie.languages[0]}}</i></span>
+                            <span>分钟: <i style="color: green">{{movie.durations?movie.durations[0]:''}}</i></span>
+                            <span>语言: <i style="color: green">{{movie.languages?movie.languages[0]:''}}</i></span>
                         </div>
                     </router-link>
                 </div>
@@ -84,7 +84,7 @@ export default{
         }
     },
     mounted(){
-        console.log(this.$store.getters.MusicCollection)
+//        console.log(this.$store.getters.MusicCollection)
     }
 }
 </script>
@@ -159,5 +159,11 @@ img{
         padding-left: 20/@r;
         padding-top: 30/@r;
         color: #f60;
+    }
+    .movie h2{
+        background: green;
+    }
+    .Book h2{
+        background: #1e4faa;
     }
 </style>

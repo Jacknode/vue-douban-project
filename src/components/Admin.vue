@@ -6,14 +6,14 @@
                     <span><i class="fa fa-user-circle-o"></i></span>
                     <router-link to="/login">
                         <p v-if="isLogin">欢迎您:{{username}}</p>
-                        <p v-else="">登录 / 注册</p>
+                        <p v-else="">登录 / 注册豌豆</p>
                     </router-link>
                 </header>
                 <section class="content">
                     <ul id="list">
                         <router-link tag="li" to="/collection">
-                                <span class="fa fa-heart"></span>
-                                <p>收藏</p>
+                            <span class="fa fa-heart"></span>
+                            <p>收藏</p>
                         </router-link>
                         <router-link tag="li" to="/book">
                             <span class="fa fa-book" style="color: blue"></span>

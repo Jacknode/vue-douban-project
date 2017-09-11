@@ -8,9 +8,9 @@
             <div class="clear"></div>
             <div class="picAll">
                 <div class="pics">
-                   <a href="javascript:;"  v-for="item in bannerList">
+                   <a href="javascript:;"  v-for="item in banner">
                       <router-link :to="'detail/movie/'+itemStr+'/'+item.id">
-                          <img :src="item.images.small" alt="">
+                          <img alt="" v-lazy="item.images.small">
                           <p class="title">{{item.title}}</p>
                           <p v-show="item.isOff">
                               <i class="fa fa-star active" v-for="a in item.index"></i>
@@ -27,28 +27,7 @@
 </template>
 <script>
     export default{
-        props:['banner','title','itemStr'],
-        computed:{
-            bannerList(){
-                var arr = [];
-                arr = this.banner;
-                for(var i=0;i<arr.length;i++){
-                    var start = Math.floor(arr[i].rating.average/2);
-                    if(start==0){
-                        arr[i].isOff = false
-                    }else{
-                        arr[i].isOff = true
-                    }
-                    arr[i].index = start;
-                }
-                return arr;
-            }
-        },
-        components:{
-        },
-        mounted(){
-
-        }
+        props:['banner','title','itemStr']
     }
 </script>
 <style scoped>

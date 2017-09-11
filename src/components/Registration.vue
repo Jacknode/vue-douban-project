@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="content">
-            <h1>欢迎加入豆瓣</h1>
+            <h1>欢迎加入豌豆</h1>
             <mu-auto-complete hintText="邮箱 / 手机号 / 用户名" labelFloat label="邮箱 / 手机号 / 用户名" fullWidth @input="username"/>
 
             <!--<mu-auto-complete hintText="密码最少6位" labelFloat label="密码最少6位" fullWidth @input="password"/>-->

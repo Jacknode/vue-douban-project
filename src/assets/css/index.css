@@ -380,7 +380,7 @@ header .header a i {
   height: 1.6rem;
 }
 .detailContent .Essay .EssayRight .EssayHeader span:nth-of-type(2) i.active {
-  padding-top: 0.5rem;
+  padding-top: 0.3rem;
   color: #f6b633;
   float: left;
 }

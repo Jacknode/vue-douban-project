@@ -65,6 +65,8 @@ vue,vuex,vue-router,axios,muse-ui,webpack,vue-scroller
 
 > 12. 豆瓣图片的防盗链问题 解决方法：给img标签添加 referrerpolicy="no-referrer"
 
+> 13. 添加图片懒加载功能
+
 # 豆瓣app在线预览二维码
 
 ![豆瓣手机版app](static/douban.png)

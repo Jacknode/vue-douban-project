@@ -84,7 +84,7 @@
             changeVal(e,val){
                 this.newVal = val;
                 this.showCard = true;
-                this.$http.get(obj.api('/list/search?q='+val+'')).then((data)=>{
+                this.$http.get(obj.newApi('/list/search?q='+val+'')).then((data)=>{
                     var result = data.data.subjects;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);
@@ -99,7 +99,7 @@
                     var arr = result.slice(0,2);
                     this.$store.dispatch('setInputList',arr)
                 })
-                this.$http.get(obj.api('/book/search?q='+val+'')).then((data)=>{
+                this.$http.get(obj.newApi('/book/search?q='+val+'')).then((data)=>{
                     var result = data.data.books;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);
@@ -117,7 +117,7 @@
             },
             loadAll(){
                 this.$store.dispatch('hideLoadAll');
-                this.$http.get(obj.api('/list/search?q='+this.newVal+'')).then((data)=>{
+                this.$http.get(obj.newApi('/list/search?q='+this.newVal+'')).then((data)=>{
                     var result = data.data.subjects;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);
@@ -134,7 +134,7 @@
             },
             loadBookAll(){
                 this.$store.dispatch('hideBookLoadAll');
-                this.$http.get(obj.api('/book/search?q='+this.newVal+'')).then((data)=>{
+                this.$http.get(obj.newApi('/book/search?q='+this.newVal+'')).then((data)=>{
                     var result = data.data.books;
                     for(var i=0;i<result.length;i++){
                         var start = Math.round(result[i].rating.average/2);

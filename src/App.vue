@@ -4,7 +4,7 @@
     <!--头部-->
     <header>
       <div class="header">
-          <router-link to="/" class="active">豆瓣</router-link>
+          <router-link to="/" class="active">豌豆</router-link>
           <router-link to="/movie" class="blue">电影</router-link>
           <router-link to="/book" class="Earth">图书</router-link>
           <router-link to="/game" class="yellow">游戏</router-link>
@@ -97,7 +97,7 @@ export default {
         /*background: #fff;*/
     /*}*/
     footer{
-        position: absolute;
+        position: fixed;
         left: 0;
         bottom: 0;
         height: 66/@r;

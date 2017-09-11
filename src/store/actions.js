@@ -47,9 +47,9 @@ export default {
                 var result = data.data;
                 commit('setDetails',result)
             })
-            //短评条目列表
-            axios.get(obj.api('/list/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=2')).then((data)=>{
-                var reviews = data.data.reviews;
+            // //短评条目列表
+            JSONP.getJSON('https://api.douban.com/v2/movie/subject/'+id+'/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=2&callback=json',null,function (data) {
+                var reviews = data.reviews;
                 if(reviews.length){
                     for(var i=0;i<reviews.length;i++){
                         if(!reviews[i].rating){
@@ -68,8 +68,9 @@ export default {
                     // this.$store.dispatch('setReviews',reviews)
                     commit('setReviews',reviews)
                 }
+                resolve();
             })
-            resolve();
+
         })
     },
     loadMoreList(store,{ page, count,id}){
@@ -87,7 +88,6 @@ export default {
                         }
                         reviews[i].index = start;
                     }
-                    // console.log(reviews)
                     reviews = reviews.slice(count-2)
                     store.commit('pushReviews',reviews)
                     resolve()
@@ -100,7 +100,7 @@ export default {
         })
     },
     getBookList({commit},id){
-        console.log(id)
+        // console.log(id)
     },
     setNewLists({commit},newLists){
         commit('setNewLists',newLists)
@@ -113,9 +113,9 @@ export default {
     },
     setBookReviewsList(store,{page,count,id}){
         return new Promise(function(resolve,reject) {
-            store.dispatch('showLoading')
+            // store.dispatch('showLoading')
             JSONP.getJSON('https://m.douban.com/rexxar/api/v2/book/'+id+'/interests?start='+page+'&callback=json1&count='+count+'',null,function (data) {
-                store.dispatch('hideLoading')
+                // store.dispatch('hideLoading')
                 var result = data.interests;
                 for(var i=0;i<result.length;i++){
                     if(!result[i].rating){
@@ -132,7 +132,7 @@ export default {
                     result[i].index = start;
                 }
                 result = result.slice(count-2);
-                console.log(result)
+                // console.log(result)
                 store.commit('setBookReviewsLists',result);
                 if(store.getters.newBookReviews.length){
                     resolve();
@@ -261,7 +261,6 @@ export default {
     },
     setMusicCollection({commit},musicCollection){
         commit('setMusicCollection',musicCollection)
-        commit('setMusicCollection',musicCollection)
     },
     //图书购买
     setBuyBook({commit},buyBook){
@@ -298,15 +297,73 @@ export default {
             var result = data.subject_collection_items;
             store.commit('getArrlist2',result)
         })
+    },
+    getGameReviews({commit}){
+        JSONP.getJSON('https://m.douban.com/rexxar/api/v2/game/27005453/interests?count=20&order_by=hot&start=0&ck=&for_mobile=1&callback=json1',null,function (data) {
+           commit('getGameReviews',data.interests)
+
+        })
+    },
+    //首页
+    getMovieLists(store){
+        axios.get( obj.api('/list/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=8')).then(function (data) {
+            var result = data.data.subjects;
+
+            for(var i=0;i<result.length;i++){
+                var start = Math.round(result[i].rating.average/2);
+                if(start==0){
+                    result[i].isOff = false
+                }else{
+                    result[i].isOff = true
+                }
+                result[i].index = start;
+            }
+            store.commit('getBannerlist',result)
+        })
+        axios.get(obj.api('/list/coming_soon?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=8')).then(function (data) {
+            var result = data.data.subjects;
+
+            for(var i=0;i<result.length;i++){
+                var start = Math.round(result[i].rating.average/2);
+                if(start==0){
+                    result[i].isOff = false
+                }else{
+                    result[i].isOff = true
+                }
+                result[i].index = start;
+            }
+            store.commit('getUpcomingList',result)
+        })
+        axios.get(obj.api('/list/new_movies?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=8')).then(function (data) {
+            var result = data.data.subjects;
+
+            if(result){
+                for(var i=0;i<result.length;i++){
+                    var start = Math.round(result[i].rating.average/2);
+                    if(start==0){
+                        result[i].isOff = false
+                    }else{
+                        result[i].isOff = true
+                    }
+                    result[i].index = start;
+                }
+            }
+            store.commit('getNewMoveList',result)
+        })
+        axios.get(obj.api('/list/top250?start=0&count=8')).then(function (data) {
+            var result = data.data.subjects;
+
+            for(var i=0;i<result.length;i++){
+                var start = Math.round(result[i].rating.average/2);
+                if(start==0){
+                    result[i].isOff = false
+                }else{
+                    result[i].isOff = true
+                }
+                result[i].index = start;
+            }
+            store.commit('getTopList',result)
+        })
     }
 }
 
-
-// let api = {
-//     prod: {
-//
-//     },
-//     test: {
-//
-//     }
-// }

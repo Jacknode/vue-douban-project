@@ -1,21 +1,17 @@
 <template>
   <div id="Home">
     <!--中间部分-->
-    <!--<section id="wrap">-->
-      <!--<div class="scroll">-->
-          <scroller
-              class="positions"
-          >
+      <scroller
+          class="positions"
+      >
           <ContentView :banner="bannerList" title="影院热映" itemStr="in_theaters">
           </ContentView>
           <ContentView :banner="UpcomingList" title="即将上映" itemStr="coming_soon"></ContentView>
-          <ContentView :banner="UpcomingList" title="新片榜" itemStr="new_movies"></ContentView>
+          <ContentView :banner="newMoveList" title="新片榜" itemStr="new_movies"></ContentView>
           <ContentView :banner="TopList" title="Top250" itemStr="top250"></ContentView>
           <FooterList :footerList="footerList" itemStr="moive"></FooterList>
           <div class="con"></div>
-          </scroller>
-      <!--</div>-->
-    <!--</section>-->
+      </scroller>
   </div>
 </template>
 <script>
@@ -23,14 +19,11 @@ import banner from '../assets/js/fn.js'
 import ContentView from './wrapContent.vue'
 import FooterList from './footerList.vue'
 import obj from '../assets/js/api'
+import {mapGetters} from 'vuex'
 export default{
     name:'Home',
     data(){
         return {
-            bannerList:[],
-            UpcomingList:[],
-            newMoveList:[],
-            TopList:[],
             footerList:[
                 {
                     name:[{val:'经典',link:'movieVclassic'},{val:'冷门佳片',link:'movieVunderrated'}]
@@ -61,53 +54,19 @@ export default{
                 }]
         }
     },
+    computed:mapGetters([
+        'bannerList',
+        'UpcomingList',
+        'newMoveList',
+        'TopList'
+    ]),
     mounted(){
-      this.getItem();
+        this.$store.dispatch('getMovieLists')
     },
     updated(){
         banner();
     },
     methods:{
-        getItem(){
-            var _this = this;
-
-            this.$http.get( obj.api('list/in_theaters?start=0&count=8')).then(function (data) {
-                var result = data.data.subjects;
-                _this.bannerList = result
-
-                for(var i=0;i<result.length;i++){
-                    var start = Math.round(result[i].rating.average/2);
-                    _this.bannerList[i].index = start;
-                }
-            })
-            this.$http.get(obj.api('list/coming_soon?start=0&count=8')).then(function (data) {
-                var result = data.data.subjects;
-                _this.UpcomingList = result
-
-                for(var i=0;i<result.length;i++){
-                    var start = Math.round(result[i].rating.average/2);
-                    _this.UpcomingList[i].index = start;
-                }
-            })
-            this.$http.get(obj.api('list/new_movies?start=0&count=8')).then(function (data) {
-                var result = data.data.subjects;
-                _this.newMoveList = result
-
-                for(var i=0;i<result.length;i++){
-                    var start = Math.round(result[i].rating.average/2);
-                    _this.newMoveList[i].index = start;
-                }
-            })
-            this.$http.get(obj.api('list/top250?start=0&count=8')).then(function (data) {
-                var result = data.data.subjects;
-                _this.TopList = result
-
-                for(var i=0;i<result.length;i++){
-                    var start = Math.round(result[i].rating.average/2);
-                    _this.TopList[i].index = start;
-                }
-            })
-        }
     },
     components:{
         ContentView,
@@ -117,7 +76,7 @@ export default{
 </script>
 <style scoped>
     .con{
-        height: 50px;
+        height: 120px;
         width: 100%;
     }
     .positions{

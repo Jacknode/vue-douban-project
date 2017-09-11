@@ -146,6 +146,7 @@
         position: absolute;
         left: 160/@r;
         top:-2rem;
+        opacity: 0;
         transition: .5s;
         background: green;
         color: #fff;
@@ -155,6 +156,7 @@
     }
     .show{
         top:1rem;
+        opacity: 1;
     }
     .login{
         position: absolute;
