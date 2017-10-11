@@ -70,3 +70,13 @@ vue,vuex,vue-router,axios,muse-ui,webpack,vue-scroller
 # 豆瓣app在线预览二维码
 
 ![豆瓣手机版app](static/douban.png)
+
+# 项目页面显示
+
+![豆瓣手机版app](static/pic1.jpg )
+![豆瓣手机版app](static/pic2.jpg)
+![豆瓣手机版app](static/pic3.jpg )
+![豆瓣手机版app](static/pic4.jpg)
+![豆瓣手机版app](static/pic5.jpg )
+![豆瓣手机版app](static/pic6.jpg)
+![豆瓣手机版app](static/pic7.jpg)
